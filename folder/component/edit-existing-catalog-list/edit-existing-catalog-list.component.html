@@ -1,0 +1,875 @@
+<p-toast></p-toast>
+<div class="page-container pt-4 pb-4">
+  <div class="container">
+    <!-- <div
+        contenteditable="true"
+        [(ngModel)]="currentDataName"
+        (click)="prevent($event)"
+        [ngModelOptions]="{ standalone: true }"
+        (blur)="editPackName($event, apiRequest)"
+        class="text-ellipsis--2 editablePack font-large mb__25"
+      >
+        {{ currentDataName }}
+      </div>
+     -->
+    <form [formGroup]="paramsForm">
+      <div class="page-content-container">
+        <!-- <ng-scrollbar [appearance]="'standard'" class="scrollHV"> -->
+        <div class="page-spliter">
+          <div class="page-spliter-left">
+            <div class="page-container-api">
+              <div class="page-container-details-api">
+                <div class="page-container-details-header-api">
+                  <environment-dropdown></environment-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="card api-cardInfo-status">
+              <div class="card-top-Sec box-shadow">
+                <!-- <div class="card-title uppercase">{{ currentDataName }}</div> -->
+                <div
+                  contenteditable="true"
+                  [(ngModel)]="currentDataName"
+                  (click)="prevent($event)"
+                  [ngModelOptions]="{ standalone: true }"
+                  (blur)="editPackName($event, apiRequest)"
+                  class="text-ellipsis--2 editablePack font-large mb__25"
+                >
+                  {{ currentDataName }}
+                </div>
+                <div class="flex">
+                  <div class="flex-grow-1">
+                    <div class="cont-info-row">
+                      <div>
+                        <button type="button" class="tag">Rest</button>
+                      </div>
+                      <div class="card-row-dropdown">
+                        <p-dropdown
+                          [(ngModel)]="version"
+                          (onChange)="createNewVersion($event)"
+                          [options]="catelogRevision"
+                          placeholder="Version"
+                          class="w-full"
+                          styleClass="w-full sm-repo-dropDfield"
+                        >
+                        </p-dropdown>
+                      </div>
+                      <div>
+                        <div class="icon-svg line-height-0">
+                          <svg width="20" height="20" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M8.58707 2.08234L2.18264 12.4568C2.05059 12.6787 1.98073 12.9302 1.97999 13.1865C1.97925 13.4427 2.04766 13.6946 2.17842 13.9172C2.30919 14.1398 2.49774 14.3253 2.72532 14.4553C2.9529 14.5852 3.21158 14.6551 3.47562 14.6579H16.2845C16.5485 14.6551 16.8072 14.5852 17.0348 14.4553C17.2624 14.3253 17.4509 14.1398 17.5817 13.9172C17.7124 13.6946 17.7809 13.4427 17.7801 13.1865C17.7794 12.9302 17.7095 12.6787 17.5775 12.4568L11.173 2.08234C11.0382 1.86671 10.8484 1.68843 10.622 1.5647C10.3955 1.44098 10.14 1.37598 9.88005 1.37598C9.62014 1.37598 9.36462 1.44098 9.13814 1.5647C8.91166 1.68843 8.72186 1.86671 8.58707 2.08234V2.08234Z"
+                              fill="#FF820F"
+                              stroke="#FF820F"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M9.88916 11.7231L9.88916 8.78836"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M9.88916 5.85352L9.88124 5.85352"
+                              stroke="white"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ml-2">
+                    <div class="imgScan-icon">
+                      <img (click)="clickAuthCatalog()" src="/assets/images/fingerprint.svg" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="status-continer">
+                <div class="status-item">
+                  <span class="status-heading">Total API</span><span class="status-value">{{ totalCount }}</span>
+                </div>
+                <div class="status-item">
+                  <span class="status-heading">Passed </span><span class="status-value status-value-green">00</span>
+                </div>
+                <div class="status-item">
+                  <span class="status-heading">Failed</span><span class="status-value status-value-red">00</span>
+                </div>
+                <div class="status-item"><span class="status-heading">Inactive</span><span class="status-value">00</span></div>
+              </div>
+            </div>
+            <div class="status-continer text-center">
+              <!-- <div class="add-btn" *ngIf="cardShow == 1" (click)="addCard(0)">
+            <span class="add-api"> ADD API </span>
+            <span class="button-add-small">
+              <i class="pi pi-plus"></i>
+            </span>
+          </div> -->
+            </div>
+
+            <!-- <div class="card" *ngIf="cardShow == 0"> -->
+            <div class="card api-Search-card flex-1 flex flex-column">
+              <div class="top-Bar">
+                <div class="search-bar-wrapper">
+                  <div class="field mb-0 flex-grow-1">
+                    <div class="cstFld-search searchBtn">
+                      <div class="field mb-0">
+                        <!-- <input type="text" pInputText placeholder="Quick Search" class="w-full field-h-40 fieldStl-1" /> -->
+                        <input
+                          type="text"
+                          pInputText
+                          placeholder="Quick Search"
+                          [(ngModel)]="currApiSearch"
+                          (input)="searchApi($event.target)"
+                          class="w-full field-h-40 fieldStl-1"
+                        />
+                      </div>
+                      <div class="absolute right-0 top-0 h-full">
+                        <button type="button" pButton pRipple icon="pi pi-search" class="h-full fld-btn"></button>
+                      </div>
+                    </div>
+                  </div>
+                  <span role="button" class="button-add-small"><i class="pi pi-plus"></i></span>
+                  <span role="buttton" class="inline-flex font-size-26"><i class="icon play"></i></span>
+
+                  <!-- <p-button styleClass="p-button-outlined btnstl-2 hide-label">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M17.0005 12.1042L7.00049 12.1042"
+                        stroke="#B2B2B2"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M19.7871 6.00732L3.78711 6.00732"
+                        stroke="#B2B2B2"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path d="M14 18L10 18" stroke="#B2B2B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </p-button> 
+
+                  <div class="align-self-center ml-3">
+                    <span role="button" class="button-add-small"><i class="pi pi-plus"></i></span>
+                  </div>-->
+                </div>
+              </div>
+
+              <!-- <div class="p__20 pb__0">
+                <div class="search-bar-wrapper pb__20">
+                  <span class="p-input-icon-right search-input-wrap">
+                    <input type="text" pInputText class="w-100" placeholder="Quick Search" />
+                  </span>
+                  <span role="buttton" class="font-size-26 mr-tp"> <img src="/assets/images/api-line.svg" alt="" /></span>
+                  <span role="button" class="button-add-small"><i class="pi pi-plus"></i></span>
+                </div>
+              </div> -->
+
+              <div class="list-wrapper flex-1">
+                <!-- <ng-scrollbar [appearance]="'standard'" class="relative h-full sideScroll-HV" (reachedBottom)="onApiScrollingFinished()" [reachedOffset]="200"> -->
+                <div class="relative h-full sideScroll-HV">
+                  <div class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style">
+                    <div
+                      class="list-node"
+                      [ngClass]="i == highlightCard ? 'list-node-select' : ''"
+                      *ngFor="let item of apiRequest; index as i"
+                    >
+                      <div class="list-item" (click)="addtitle(0, i, item)">
+                        <div class="list-item-name grid">
+                          <div class="col pb-0 min-w-0">
+                            <div class="api-name" pTooltip="{{ item.name }}" tooltipPosition="top">{{ item.name }}</div>
+                          </div>
+                          <div class="col-fixed pb-0">
+                            <span class="api-method">
+                              <!-- <span class="tag" [ngClass]="item.method">{{ item.method | uppercase }}</span> -->
+                              <span class="tag" [ngClass]="item.method">{{ item.method | uppercase }}</span>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="grid align-items-center">
+                          <!-- <div class="col pb-0">
+                        <span class="subText">Time Taken : - <span class="result">{{ item.timetaken }}</span></span>
+                      </div> -->
+                          <div class="col pb-0">
+                            <span class="subText"
+                              >Status <span class="result green"> {{ item.status }}</span></span
+                            >
+                          </div>
+                          <!--<span
+                        >Status : - <span class="result" [ngClass]="item.isSucess ? 'green' : 'red'">{{ item.status }}</span></span
+                      > -->
+                          <div class="col-fixed pb-0">
+                            <i (click)="removeRequest(i, item)" class="icon delete"></i>
+                            <!-- <label class="switch">
+                              <input type="checkbox" />
+                              <span class="slider round"></span>
+                            </label> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- </ng-scrollbar> -->
+              </div>
+            </div>
+          </div>
+          <div class="page-spliter-middle" [ngClass]="expandFullCard == true ? 'card-fullscreen' : 'page-width'">
+            <div class="sv-accountTabsWrapper flex flex-column h-full">
+              <div class="tab-content flex-grow-1 sv-cstTab">
+                <div [ngClass]="toggleCatalog === true ? 'active' : ''" class="tab-pane" id="home-vr">
+                  <div class="card">
+                    <div [ngSwitch]="activeIndex">
+                      <api-catalog-auth-list
+                        (myOutput)="getData($event)"
+                        *ngSwitchCase="0"
+                        [collectionId]="currentData"
+                        [authId]="authCatalogId"
+                      ></api-catalog-auth-list>
+                      <edit-existing-catalog-auth *ngSwitchCase="1"></edit-existing-catalog-auth>
+                    </div>
+                  </div>
+                </div>
+                <div [ngClass]="toggleApi === true ? 'active' : ''" class="tab-pane" id="profile-vr">
+                  <div class="card">
+                    <div class="container-api-validate">
+                      <!-- <form [formGroup]="paramsForm"> -->
+                      <div class="pb-3">
+                        <div class="flex api-validate-status pb__30">
+                          <div class="flex-1 min-w-0">
+                            <!-- <div class="enter-value pt-3" [hidden]="!titleShow">
+                        <input type="text" class="w-100" placeholder="Enter API name" pInputText />
+                      </div> -->
+                            <div class="card-page-title" [hidden]="titleShow">{{ accountName }}</div>
+                          </div>
+                          <div>
+                            <ul class="list-none p-0 m-0 flex align-items-center">
+                              <li class="mr-3">
+                                <span (click)="openExcutionLogs()" class="top-execution display-expand">
+                                  <img src="assets/images/catalog.svg" alt="" />
+                                </span>
+                              </li>
+                              <li>
+                                <span [hidden]="!expandFullCard" (click)="expandCard(false)" class="top-expand">
+                                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                      fill-rule="evenodd"
+                                      clip-rule="evenodd"
+                                      d="M12.4152 4.999L15.0002 5C15.5522 5 16.0002 5.448 16.0002 6.001C15.9992 6.553 15.5512 7 15.0002 7H14.9992L10.0243 6.997C9.47425 6.997 9.02725 6.552 9.02425 6.002L9.00025 1.005C8.99725 0.452998 9.44225 0.00299824 9.99525 -1.76256e-06H10.0002C10.5503 -1.76256e-06 10.9972 0.443998 11.0002 0.994998L11.0122 3.573L14.2922 0.292998C14.6832 -0.0980018 15.3162 -0.0980018 15.7072 0.292998C16.0972 0.683998 16.0972 1.316 15.7072 1.707L12.4152 4.999ZM1.00425 9.0004L6.00125 9.0254C6.55125 9.0284 6.99625 9.4744 6.99625 10.0244L7.00025 14.9994C7.00025 15.5514 6.55225 16.0004 6.00025 16.0004C5.44725 16.0004 5.00025 15.5524 5.00025 15.0014L4.99825 12.4164L1.70725 15.7074C1.51125 15.9024 1.25525 16.0004 1.00025 16.0004C0.74425 16.0004 0.48825 15.9024 0.29325 15.7074C-0.09775 15.3164 -0.09775 14.6834 0.29325 14.2934L3.57225 11.0134L0.99525 11.0004C0.44225 10.9974 -0.00274999 10.5464 0.000250007 9.9954C0.00225001 9.4444 0.45025 9.0004 1.00025 9.0004H1.00425Z"
+                                      fill="#2E3A59"
+                                    />
+                                  </svg>
+                                </span>
+                                <span [hidden]="expandFullCard" (click)="expandCard(true)" class="top-expand">
+                                  <img src="assets/images/api-expand.svg" alt="" />
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="api-validate-form">
+                          <div>
+                            <div class="field-col-sm">
+                              <p-dropdown
+                                [options]="options1"
+                                styleClass="w-100"
+                                formControlName="method"
+                                class="form-control"
+                                optionLabel="name"
+                              ></p-dropdown>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1 min-w-0">
+                            <div class="">
+                              <div class="wrap-in">
+                                <input type="text" class="form-control w-100" pInputText formControlName="Iurl" />
+                              </div>
+                              <!-- <span class="w-73"> -->
+                            </div>
+                          </div>
+                          <div>
+                            <!-- <button (click)="getExecute()" pButton class="custom-button" type="button" label="Execute"> -->
+                            <button (click)="saveValuesBeforeExecute()" pButton class="custom-button" type="button" label="Execute">
+                              <img src="assets/images/executearrow-white.svg" alt="" class="icon" />
+                            </button>
+                          </div>
+                        </div>
+                        <ul class="catalog-status flex justify-content-end">
+                          <li [ngClass]="expandFullCard == true ? 'display-in' : 'display-out'">
+                            <div class="acountCards">
+                              Status <span class="api-st color-green">{{ getParamsData?.state }}</span>
+                            </div>
+                          </li>
+                          <li [ngClass]="expandFullCard == true ? 'display-in' : 'display-out'">
+                            <div class="acountCards">
+                              Time <span class="api-st">{{ responseTime }}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="api-validate-spliter">
+                        <div class="api-catalogHV">
+                          <as-split direction="horizontal" [gutterSize]="1" class="split">
+                            <as-split-area [size]="50" id="h-left-pane">
+                              <div class="tab-wrapper pt__30 h-full relative">
+                                <!--<div class="relative">
+                               <div class="floating-icon-wrapper">
+                              <span (click)="openRawResponse()"><i class="icon eye"></i></span>
+                              <span (click)="addSelectedFiles()"><i class="icon tree-add"></i></span>
+                            </div> 
+                            </div>-->
+                                <p-tabView class="mw-tabview mw-tabview-body-scroll h-100">
+                                  <p-tabPanel header="Params">
+                                    <div class="relative pt__30 h-full">
+                                      <div class="relative h-full">
+                                        <div
+                                          class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style"
+                                        >
+                                          <div class="grid-wrapper pr__20">
+                                            <div class="grid-container">
+                                              <div class="grid-content">
+                                                <p-table
+                                                  styleClass="table-design table-design-form text-sm"
+                                                  [value]="getFormArray('params').controls"
+                                                  responsiveLayout="scroll"
+                                                >
+                                                  <ng-template pTemplate="header">
+                                                    <tr>
+                                                      <th class="w-3rem">
+                                                        <p-checkbox></p-checkbox>
+                                                      </th>
+                                                      <th>Query Parameter</th>
+                                                      <th>Value</th>
+                                                      <th class="w-3rem"></th>
+                                                    </tr>
+                                                  </ng-template>
+                                                  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                                                    <ng-container formArrayName="params">
+                                                      <tr [formGroupName]="rowIndex">
+                                                        <td>
+                                                          <p-checkbox
+                                                            formControlName="isParamSelected"
+                                                            name="group1"
+                                                            [binary]="true"
+                                                            inputId="ny"
+                                                          ></p-checkbox>
+                                                        </td>
+                                                        <td>
+                                                          <input
+                                                            formControlName="paramField"
+                                                            type="text"
+                                                            class="w-100"
+                                                            placeholder="Enter Value"
+                                                            pInputText
+                                                            class="w-full field-sm"
+                                                          />
+                                                        </td>
+                                                        <td>
+                                                          <input
+                                                            formControlName="paramValue"
+                                                            type="text"
+                                                            class="w-100"
+                                                            placeholder="Enter Value"
+                                                            pInputText
+                                                            class="w-full field-sm"
+                                                          />
+                                                        </td>
+                                                        <td class="text-center">
+                                                          <i
+                                                            (click)="removeFormArrayParams($event, rowIndex)"
+                                                            class="icon delete fn-size-10 c-pointer"
+                                                          ></i>
+                                                        </td>
+                                                      </tr>
+                                                    </ng-container>
+                                                  </ng-template>
+                                                </p-table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="mt__15">
+                                            <span (click)="addFormArray('params', { isCreated: true })" class="c-pointer addButton-sm">
+                                              <span class="button-add-small">
+                                                <i class="pi pi-plus"></i>
+                                              </span>
+                                              Add Row</span
+                                            >
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </p-tabPanel>
+                                  <p-tabPanel header="Request header">
+                                    <div class="relative pt__30 h-full">
+                                      <div class="relative h-full">
+                                        <div
+                                          class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style"
+                                        >
+                                          <div class="grid-wrapper pr__20">
+                                            <div class="grid-container">
+                                              <div class="grid-content">
+                                                <p-table
+                                                  styleClass="table-design table-design-form text-sm"
+                                                  [value]="getFormArray('requestHeader').controls"
+                                                  responsiveLayout="scroll"
+                                                >
+                                                  <ng-template pTemplate="header">
+                                                    <tr>
+                                                      <th class="w-3rem">
+                                                        <p-checkbox></p-checkbox>
+                                                      </th>
+                                                      <th>Headers</th>
+                                                      <th>Value</th>
+                                                      <th class="w-3rem"></th>
+                                                    </tr>
+                                                  </ng-template>
+                                                  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                                                    <ng-container formArrayName="requestHeader">
+                                                      <tr [formGroupName]="rowIndex">
+                                                        <td>
+                                                          <p-checkbox
+                                                            formControlName="isParamSelected"
+                                                            name="group1"
+                                                            [binary]="true"
+                                                            inputId="ny"
+                                                          ></p-checkbox>
+                                                        </td>
+                                                        <td>
+                                                          <input
+                                                            formControlName="paramHeader"
+                                                            type="text"
+                                                            class="w-100"
+                                                            placeholder="Enter Value"
+                                                            pInputText
+                                                            class="w-full field-sm"
+                                                          />
+                                                        </td>
+                                                        <td>
+                                                          <input
+                                                            formControlName="paramValue"
+                                                            type="text"
+                                                            class="w-100"
+                                                            placeholder="Enter Value"
+                                                            pInputText
+                                                            class="w-full field-sm"
+                                                          />
+                                                        </td>
+                                                        <td class="text-center">
+                                                          <i
+                                                            (click)="removeFormArrayHeader($event, rowIndex)"
+                                                            class="icon delete fn-size-10 c-pointer"
+                                                          ></i>
+                                                        </td>
+                                                      </tr>
+                                                    </ng-container>
+                                                  </ng-template>
+                                                </p-table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="mt__15">
+                                            <span
+                                              (click)="addFormArray('requestHeader', { isCreated: true })"
+                                              class="c-pointer addButton-sm"
+                                            >
+                                              <span class="button-add-small">
+                                                <i class="pi pi-plus"></i>
+                                              </span>
+                                              Add Row</span
+                                            >
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </p-tabPanel>
+                                  <p-tabPanel class="h-100" header="Request Body">
+                                    <as-split direction="vertical" [gutterSize]="1" class="split pt__20 overflow-visible">
+                                      <as-split-area [size]="60" id="v-top-panes" class="overflow-visible">
+                                        <div (click)="tophandcloses()" class="to-top-extender">
+                                          <i class="pi pi-chevron-up"></i>
+                                        </div>
+                                        <div class="pb__20 panel-height-wrap">
+                                          <div class="h-100 pr__20">
+                                            <div class="panel-height flex flex-column">
+                                              <div class="flex justify-content-end align-items-center">
+                                                <div class="alignOverlay-Btn">
+                                                  <!-- <span (click)="addSelectedJson()" class="mr-3 c-pointer"
+                                                    ><i class="icon tree-add icon icons"></i
+                                                  ></span> -->
+                                                  <img
+                                                    src="assets/images/button-Icon-pen.svg"
+                                                    alt=""
+                                                    class="icon c-pointer"
+                                                    (click)="openRawRequest()"
+                                                  />
+                                                </div>
+                                              </div>
+
+                                              <div class="relative h-full flex-1">
+                                                <div
+                                                  class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style"
+                                                >
+                                                  <json-editor class="editor" [options]="editorOptions" [data]="data"> </json-editor>
+                                                  <!-- <json-editor [options]="editorOptions" [data]="selectedTreeValue"></json-editor> -->
+                                                  <!-- <p-tree
+                                                    [propagateSelectionUp]="false"
+                                                    [propagateSelectionDown]="false"
+                                                    [value]="files"
+                                                    styleClass="tree-class tree-class-remove-disabled"
+                                                    selectionMode="checkbox"
+                                                  >
+                                                    <ng-template let-node pTemplate="default">
+                                                      <span class="node-leaft-custom" [innerHTML]="generateSplit(node.label)"></span>
+                                                    </ng-template>
+                                                  </p-tree> -->
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </as-split-area>
+                                      <as-split-area [size]="40" id="v-bottom-panes" class="upwards-pannel">
+                                        <div class="relative h-full pt__30 pb__20 pr__20 flex flex-column">
+                                          <div class="flex-1 relative">
+                                            <div
+                                              class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style"
+                                            >
+                                              <div class="grid-wrapper">
+                                                <div class="grid-container">
+                                                  <div class="grid-content">
+                                                    <p-table
+                                                      styleClass="table-design table-design-form text-sm"
+                                                      [value]="getFormArray('record').controls"
+                                                      responsiveLayout="scroll"
+                                                    >
+                                                      <ng-template pTemplate="header">
+                                                        <tr>
+                                                          <th class="w-5rem">Field</th>
+                                                          <th>Value</th>
+                                                          <th class="text-center w-5rem">Action</th>
+                                                        </tr>
+                                                      </ng-template>
+                                                      <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                                                        <ng-container formArrayName="record">
+                                                          <tr [formGroupName]="rowIndex">
+                                                            <td class="text-black">
+                                                              {{ getFormArray('record').controls[rowIndex].get('fieldName')?.value }}
+                                                            </td>
+                                                            <td>
+                                                              <input
+                                                                formControlName="fieldValue"
+                                                                type="text"
+                                                                placeholder="Enter Value"
+                                                                pInputText
+                                                                class="w-full field-sm"
+                                                              />
+                                                            </td>
+                                                            <td class="text-center">
+                                                              <i
+                                                                (click)="removeFormArray('record', rowIndex)"
+                                                                class="icon delete fn-size-10 c-pointer"
+                                                              ></i>
+                                                            </td>
+                                                          </tr>
+                                                        </ng-container>
+                                                      </ng-template>
+                                                    </p-table>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </as-split-area>
+                                    </as-split>
+                                  </p-tabPanel>
+                                </p-tabView>
+                              </div>
+                            </as-split-area>
+                            <as-split-area [size]="50" id="h-right-pane">
+                              <div (click)="lefthandexpand()" class="left-pane-extender">
+                                <i class="pi pi-chevron-right"></i>
+                              </div>
+                              <div class="tab-wrapper pt__30 h-full relative">
+                                <div class="relative">
+                                  <div class="floating-icon-wrapper">
+                                    <ul class="floating-IconBtns">
+                                      <li>
+                                        <span class="icon-btn" pTooltip="View Response" tooltipPosition="top" (click)="openRawResponse()"
+                                          ><i class="icon eye"></i
+                                        ></span>
+                                      </li>
+                                      <!-- <li>
+                                        <span class="icon-btn" pTooltip="Watch List" tooltipPosition="top" (click)="addSelectedFiles()"
+                                          ><i class="icon tree-add"></i
+                                        ></span>
+                                      </li> -->
+                                    </ul>
+                                  </div>
+                                </div>
+
+                                <p-tabView class="mw-tabview mw-tabview-body-scroll mw-tabview-move-30 h-100" [activeIndex]="1">
+                                  <p-tabPanel header="Response header">
+                                    <div class="relative h-full pl__20 pt__30">
+                                      <div class="relative h-full">
+                                        <div
+                                          class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style"
+                                        >
+                                          <div class="grid-wrapper">
+                                            <div class="grid-container">
+                                              <div class="grid-content">
+                                                <p-table
+                                                  styleClass="table-design table-design-form text-sm"
+                                                  [value]="getFormArray('responseHeader').controls"
+                                                  responsiveLayout="scroll"
+                                                >
+                                                  <ng-template pTemplate="header">
+                                                    <tr>
+                                                      <th class="w-3rem">
+                                                        <p-checkbox></p-checkbox>
+                                                      </th>
+                                                      <th>Headers</th>
+                                                      <th>Value</th>
+                                                      <th class="w-3rem"></th>
+                                                    </tr>
+                                                  </ng-template>
+                                                  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                                                    <ng-container formArrayName="responseHeader">
+                                                      <tr [formGroupName]="rowIndex">
+                                                        <td>
+                                                          <p-checkbox
+                                                            formControlName="isParamSelected"
+                                                            name="group1"
+                                                            [binary]="true"
+                                                            inputId="ny"
+                                                          ></p-checkbox>
+                                                        </td>
+                                                        <td>
+                                                          <input
+                                                            formControlName="paramHeader"
+                                                            type="text"
+                                                            class="w-full field-sm"
+                                                            placeholder="Enter Value"
+                                                            pInputText
+                                                          />
+                                                        </td>
+                                                        <td>
+                                                          <input
+                                                            formControlName="paramValue"
+                                                            type="text"
+                                                            class="w-full field-sm"
+                                                            placeholder="Enter Value"
+                                                            pInputText
+                                                          />
+                                                        </td>
+                                                        <!-- <td class="text-center">
+                                                          <i
+                                                            (click)="removeFormArrayParams('responseParams', rowIndex)"
+                                                            class="icon delete fn-size-10 c-pointer"
+                                                          ></i>
+                                                        </td> -->
+                                                      </tr>
+                                                    </ng-container>
+                                                  </ng-template>
+                                                </p-table>
+                                              </div>
+                                            </div>
+                                            <div class="mt__15">
+                                              <span (click)="addFormArray('responseHeader')" class="c-pointer addButton-sm">
+                                                <span class="button-add-small">
+                                                  <i class="pi pi-plus"></i>
+                                                </span>
+                                                Add Row</span
+                                              >
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </p-tabPanel>
+                                  <p-tabPanel class="h-100" header="Response Body">
+                                    <as-split direction="vertical" [gutterSize]="1" class="split pt__20">
+                                      <as-split-area [size]="60" id="v-top-pane">
+                                        <div (click)="tophandclose()" class="to-top-extender">
+                                          <i class="pi pi-chevron-up"></i>
+                                        </div>
+                                        <div class="pb__20 panel-height-wrap">
+                                          <div class="h-100 pl__20">
+                                            <div class="panel-height">
+                                              <div class="relative h-full">
+                                                <div
+                                                  class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style"
+                                                >
+                                                  <json-editor class="editor" [options]="editorOptions2" [data]="dataResponce">
+                                                  </json-editor>
+                                                  <!-- <p-tree
+                                            [(selection)]="selectedTreeValue"
+                                            [propagateSelectionUp]="false"
+                                            [propagateSelectionDown]="false"
+                                            [value]="files"
+                                            styleClass="tree-class tree-class-remove-disabled"
+                                            selectionMode="checkbox"
+                                          >
+                                            <ng-template let-node pTemplate="default">
+                                              <span class="node-leaft-custom" [innerHTML]="generateSplit(node.label)"></span>
+                                            </ng-template>
+                                          </p-tree> -->
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </as-split-area>
+                                      <as-split-area [size]="40" id="v-bottom-pane" class="upwards-pannel">
+                                        <div class="relative h-full pt__30 pb__20 pl__20 flex flex-column">
+                                          <div class="relative flex-1 h-full">
+                                            <div
+                                              class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style"
+                                            >
+                                              <div class="grid-wrapper">
+                                                <div class="grid-container">
+                                                  <div class="grid-content">
+                                                    <p-table
+                                                      styleClass="table-design table-design-form text-sm"
+                                                      [value]="getFormArray('records').controls"
+                                                      responsiveLayout="scroll"
+                                                    >
+                                                      <ng-template pTemplate="header">
+                                                        <tr>
+                                                          <th class="w-5rem">Field</th>
+                                                          <th>Value</th>
+                                                          <th class="text-center w-5rem">Action</th>
+                                                        </tr>
+                                                      </ng-template>
+                                                      <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                                                        <ng-container formArrayName="records">
+                                                          <tr [formGroupName]="rowIndex">
+                                                            <td class="text-black">
+                                                              {{ getFormArray('records').controls[rowIndex].get('fieldName')?.value }}
+                                                            </td>
+                                                            <td>
+                                                              <input
+                                                                formControlName="fieldValue"
+                                                                type="text"
+                                                                placeholder="Enter Value"
+                                                                pInputText
+                                                                class="w-full field-sm"
+                                                              />
+                                                            </td>
+                                                            <td class="text-center">
+                                                              <i
+                                                                (click)="removeFormArray('records', rowIndex)"
+                                                                class="icon delete fn-size-10 c-pointer"
+                                                              ></i>
+                                                            </td>
+                                                          </tr>
+                                                        </ng-container>
+                                                      </ng-template>
+                                                    </p-table>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </as-split-area>
+                                    </as-split>
+                                  </p-tabPanel>
+                                </p-tabView>
+                              </div>
+                            </as-split-area>
+                          </as-split>
+                        </div>
+                      </div>
+                      <!-- </form> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tabsnav-pos">
+                <ul class="sv-tabsNav-vrt">
+                  <li [ngClass]="toggleCatalog === true ? 'active' : ''"><a class="tabsNav" (click)="catalogClicked()">Catalog</a></li>
+                  <li [ngClass]="toggleApi === true ? 'active' : ''"><a class="tabsNav" (click)="apiClicked()">API</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </ng-scrollbar> -->
+      </div>
+    </form>
+
+    <div class="button-wrapper btns-spc-R pt-4 pb-0">
+      <button
+        pButton
+        type="button"
+        label="Close"
+        (click)="clickcancel()"
+        class="button-custom p-button-outlined p-button-secondary"
+      ></button>
+      <button
+        *ngIf="toggleApi"
+        (click)="submit()"
+        pButton
+        type="button"
+        label="Save"
+        class="button-custom p-button-outlined p-button-secondary"
+      ></button>
+      <button
+        *ngIf="toggleCatalog"
+        (click)="saveDataAuthCatalog()"
+        pButton
+        type="button"
+        label="Save"
+        class="button-custom p-button-outlined p-button-secondary"
+      ></button>
+      <button
+        *ngIf="toggleApi"
+        (click)="generatAutoTestCase()"
+        pButton
+        type="button"
+        label="Generate Test"
+        class="button-custom p-button-outlined p-button-secondary"
+      ></button>
+      <!-- <button (click)="saveValuesBeforeExecute()" pButton type="button" label="Save" class="button-custom p-button-outlined p-button-secondary"></button> -->
+    </div>
+  </div>
+</div>
+
+<p-sidebar [(visible)]="openSidebar" [styleClass]="'drawer-wrapper ' + sidebarclass" [blockScroll]="true" position="right">
+  <ng-container [ngSwitch]="drawercom">
+    <create-new-version-management (cancel)="removesidebar()" *ngSwitchCase="'createVersion'"> </create-new-version-management>
+    <api-catalog-request-popup
+      [inputData]="data"
+      (jsonResponse)="saveJsonData($event)"
+      (cancel)="removesidebar()"
+      *ngSwitchCase="'rawRequest'"
+    ></api-catalog-request-popup>
+    <api-catalog-response-popup
+      [inputData]="dataResponce"
+      (cancel)="removesidebar()"
+      *ngSwitchCase="'rawResponse'"
+    ></api-catalog-response-popup>
+    <api-catalog-execution-popup
+      (cancel)="removesidebar()"
+      [inputData]="selectedId"
+      *ngSwitchCase="'excutionLogs'"
+    ></api-catalog-execution-popup>
+    <!-- <api-catalog-request-popup [inputData]="data" (cancel)="removesidebar()" *ngSwitchCase="'rawRequest'"> </api-catalog-request-popup> -->
+    <!-- <api-catalog-response-popup [inputData]="dataResponce" (cancel)="removesidebar()" *ngSwitchCase="'rawResponse'">
+    </api-catalog-response-popup>
+    <api-catalog-execution-popup *ngSwitchCase="'excutionLogs'"></api-catalog-execution-popup> -->
+    <jhi-api-test-case-create [selectedApi]="apiRequest" *ngSwitchCase="'createTest'"></jhi-api-test-case-create>
+  </ng-container>
+</p-sidebar>

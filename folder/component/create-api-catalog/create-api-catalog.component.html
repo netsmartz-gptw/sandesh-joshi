@@ -1,0 +1,321 @@
+<div class="popup flex flex-column h-full py-4">
+  <div class="flex-1 relative">
+    <div class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style">
+      <div class="px-1">
+        <form [formGroup]="createCatalog">
+          <div class="grid grid-nogutter">
+            <div class="col-12 md:col-9">
+              <div class="field mb-5">
+                <label class="formField-label">Catalog Name</label>
+                <input type="text" formControlName="name" placeholder="" class="w-100 font-normal" pInputText />
+              </div>
+
+              <div class="grid-apiType">
+                <div
+                  class="sv-ServiceCard c-pointer flex-1"
+                  [ngClass]="importmanuallystyle == 0 ? 'import-border' : 'manualy-border'"
+                  (click)="apiImportManually(true)"
+                >
+                  <div class="w-full">
+                    <div class="icon">
+                      <img src="assets/images/import-api-spec.svg" alt="" />
+                    </div>
+
+                    <div class="txt-wrap font-Nunito">Import API Spec</div>
+                  </div>
+                </div>
+                <div
+                  class="sv-ServiceCard c-pointer flex-1"
+                  [ngClass]="importmanuallystyle == 1 ? 'import-border' : 'manualy-border'"
+                  (click)="apiImportManually(false)"
+                >
+                  <div class="w-full">
+                    <div class="icon">
+                      <img class="w-full -mt-1" src="assets/images/manual-api-spec.svg" alt="" />
+                    </div>
+                    <div class="txt-wrap font-Nunito">Add API Manually</div>
+                  </div>
+                </div>
+              </div>
+              <div [hidden]="!importCard">
+                <div class="mb-5">
+                  <div class="api-buttonset">
+                    <div
+                      [ngClass]="ind == 0 ? 'active' : 'stats-item-bg-pink'"
+                      (click)="importFileUrl(true)"
+                      class="button-item flex-1 c-pointer"
+                      type="button"
+                    >
+                      Import From File
+                    </div>
+                    <div
+                      [ngClass]="ind == 1 ? 'active' : 'stats-item-bg-pink'"
+                      (click)="importFileUrl(false)"
+                      class="button-item flex-1 c-pointer"
+                      type="button"
+                    >
+                      Import From URL
+                    </div>
+                  </div>
+                </div>
+
+                <div [hidden]="!tabView">
+                  <div class="h-full flex flex-column">
+                    <div class="field mb-5">
+                      <div class="drop-zone drop-zone-file" *ngIf="createCatalog.get('fileUplaod')?.value">
+                        <span class="filename-wrapp">
+                          <span class="filename flex-grow-1">{{ createCatalog.get('fileUplaod')?.value.name }}</span>
+                          <i (click)="onFileRemove()" class="icon octagon-cancel icon-color-red c-pointer"></i
+                        ></span>
+                      </div>
+                      <div
+                        class="drop-zone"
+                        jhiDropZone
+                        (fileDropped)="onFileChange($event)"
+                        [style.display]="createCatalog.get('fileUplaod')?.value ? 'none' : 'flex'"
+                      >
+                        <span class="drop-zone__prompt">
+                          <img src="assets/images/icon-browsefile.svg" alt="" class="icon" />
+                          <span class="text-wrap flex-grow-1">
+                            Drag and drop or
+                            <span class="file-browse-click" (click)="fileInput.click()">Browse</span> your file
+                          </span>
+                        </span>
+                        <input
+                          type="file"
+                          enctype="multipart/form-data"
+                          #fileInput
+                          id="uploadCatelog"
+                          name="myFile"
+                          (change)="onFileChange($event)"
+                          class="drop-zone__input"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field mb-3">
+                    <label class="formField-label">Select Build <span class="mantori">*</span></label>
+                    <div class="relative">
+                      <div class="block p-input-icon-right api-field-Dropdown">
+                        <i class="pi field-icon c-pointer" (click)="clickFilterimportBuild(0)"></i>
+                        <input
+                          type="text"
+                          formControlName="importBuildInput"
+                          [value]="importBuildInput"
+                          placeholder="Type Build Versions or Select from the List"
+                          class="w-100 font-normal"
+                          pInputText
+                        />
+                      </div>
+                      <div *ngIf="showHideCardimportBuild == 0" class="absolute z-1 top-100 pt-1 w-full">
+                        <div class="sv-card-AvailableItem bg-white">
+                          <div class="card-head flex align-items-center">
+                            <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Available Build Versions</div>
+                            <div class="pl-2 -mr-2">
+                              <p-button (click)="clickFilterimportBuild(1)" styleClass="p-1 bg-transparent border-none text-color">
+                                <ng-template pTemplate="content">
+                                  <i class="pi pi-times fs"></i>
+                                </ng-template>
+                              </p-button>
+                            </div>
+                          </div>
+                          <div class="card-cont-wrap">
+                            <div class="wrapperChips">
+                              <div class="availableItems">
+                                <span *ngFor="let build of buildVersion; let i = index">
+                                  <span class="tag c-pointer" (click)="clickImportBuild(build.name)">{{ build.name }} </span>
+                                </span>
+                              </div>
+                              <p-button styleClass="btnFill-stl-2">
+                                <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add from JIRA</span> </ng-template>
+                              </p-button>
+                            </div>
+                            <div class="bt-wrp">
+                              <div class="text-sm text-light-2">
+                                Cant find the Build? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div [hidden]="tabView">
+                  <div class="alignment-Spc-1">
+                    <div class="field mb-4">
+                      <input
+                        type="text"
+                        placeholder="Spec URL"
+                        formControlName="openImportUrl"
+                        [value]="openImportUrl"
+                        class="w-100 font-normal"
+                        pInputText
+                      />
+                    </div>
+                    <div class="field mb-3">
+                      <label class="formField-label">Add Build <span class="mantori">*</span></label>
+                      <div class="relative">
+                        <div class="block p-input-icon-right api-field-Dropdown">
+                          <i class="pi field-icon c-pointer" (click)="clickFilterUrlBuild(0)"></i>
+                          <input
+                            type="text"
+                            formControlName="importUrlBuildInput"
+                            [value]="importUrlBuildInput"
+                            placeholder="Type Build Versions or Select from the List"
+                            class="w-100 font-normal"
+                            pInputText
+                          />
+                        </div>
+                        <div *ngIf="showHideCardUrlBuild == 0" class="absolute z-1 top-100 pt-1 w-full">
+                          <div class="sv-card-AvailableItem bg-white">
+                            <div class="card-head flex align-items-center">
+                              <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Available Build Versions</div>
+                              <div class="pl-2 -mr-2">
+                                <p-button (click)="clickFilterUrlBuild(1)" styleClass="p-1 bg-transparent border-none text-color">
+                                  <ng-template pTemplate="content">
+                                    <i class="pi pi-times fs"></i>
+                                  </ng-template>
+                                </p-button>
+                              </div>
+                            </div>
+                            <div class="card-cont-wrap">
+                              <div class="wrapperChips">
+                                <div class="availableItems">
+                                  <span *ngFor="let build of buildVersion; let i = index">
+                                    <span class="tag c-pointer" (click)="clickImportBuild(build.name)">{{ build.name }} </span>
+                                  </span>
+                                </div>
+                                <p-button styleClass="btnFill-stl-2">
+                                  <ng-template pTemplate="content">
+                                    <i class="icon pi pi-plus"></i> <span>Add from JIRA</span>
+                                  </ng-template>
+                                </p-button>
+                              </div>
+                              <div class="bt-wrp">
+                                <div class="text-sm text-light-2">
+                                  Cant find the Build? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div [hidden]="importCard">
+                <div class="field mb-4">
+                  <label class="formField-label">Select Protocol <span class="mantori">*</span></label>
+                  <div class="relative">
+                    <div class="block p-input-icon-right api-field-Dropdown">
+                      <i class="pi field-icon c-pointer" (click)="clickFilterProtocol(0)"></i>
+                      <input
+                        type="text"
+                        formControlName="manuallyProtocolInput"
+                        [value]="manuallyProtocolInput"
+                        placeholder="Type Environment Name or Select from the List"
+                        class="w-100 font-normal"
+                        pInputText
+                      />
+                    </div>
+                    <div *ngIf="showHideCardProtocol == 0" class="absolute z-2 top-100 pt-1 w-full">
+                      <div class="sv-card-AvailableItem bg-white">
+                        <div class="card-head flex align-items-center">
+                          <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Add Protocol</div>
+                          <div class="pl-2 -mr-2">
+                            <p-button (click)="clickFilterProtocol(1)" styleClass="p-1 bg-transparent border-none text-color">
+                              <ng-template pTemplate="content">
+                                <i class="pi pi-times fs"></i>
+                              </ng-template>
+                            </p-button>
+                          </div>
+                        </div>
+                        <div class="card-cont-wrap">
+                          <div class="wrapperChips">
+                            <div class="availableItems">
+                              <span class="tag c-pointer" (click)="clickManuallyProtocol('REST')">REST</span>
+                              <span class="tag c-pointer" (click)="clickManuallyProtocol('RPC')">RPC</span>
+                              <span class="tag c-pointer" (click)="clickManuallyProtocol('SOAP')">SOAP</span>
+                            </div>
+                            <p-button styleClass="btnFill-stl-2">
+                              <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add New</span> </ng-template>
+                            </p-button>
+                          </div>
+                          <div class="bt-wrp">
+                            <div class="text-sm text-light-2">
+                              Cant find the Environment? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field mb-3">
+                  <label class="formField-label">Add Build <span class="mantori">*</span></label>
+                  <div class="relative">
+                    <div class="block p-input-icon-right api-field-Dropdown">
+                      <i class="pi field-icon c-pointer" (click)="clickFilterManuallyBuild(0)"></i>
+                      <input
+                        type="text"
+                        formControlName="manuallyBuildInput"
+                        [value]="manuallyBuildInput"
+                        placeholder="Type Build Versions or Select from the List"
+                        class="w-100 font-normal"
+                        pInputText
+                      />
+                    </div>
+                    <div *ngIf="showHideCardManuallyBuild == 0" class="absolute z-1 top-100 pt-1 w-full">
+                      <div class="sv-card-AvailableItem bg-white">
+                        <div class="card-head flex align-items-center">
+                          <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Available Build Versions</div>
+                          <div class="pl-2 -mr-2">
+                            <p-button (click)="clickFilterManuallyBuild(1)" styleClass="p-1 bg-transparent border-none text-color">
+                              <ng-template pTemplate="content">
+                                <i class="pi pi-times fs"></i>
+                              </ng-template>
+                            </p-button>
+                          </div>
+                        </div>
+                        <div class="card-cont-wrap">
+                          <div class="wrapperChips">
+                            <div class="availableItems">
+                              <span *ngFor="let build of buildVersion; let i = index">
+                                <span class="tag c-pointer" (click)="clickImportBuild(build.name)">{{ build.name }} </span>
+                              </span>
+                            </div>
+                            <p-button styleClass="btnFill-stl-2">
+                              <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add from JIRA</span> </ng-template>
+                            </p-button>
+                          </div>
+                          <div class="bt-wrp">
+                            <div class="text-sm text-light-2">
+                              Cant find the Build? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-4 px-1">
+    <ul class="list-none flex justify-content-end p-0 m-0">
+      <li class="pr-3">
+        <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded" (click)="cancelScreen()"></button>
+      </li>
+      <li>
+        <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="gotoExisting()"></button>
+      </li>
+    </ul>
+  </div>
+</div>

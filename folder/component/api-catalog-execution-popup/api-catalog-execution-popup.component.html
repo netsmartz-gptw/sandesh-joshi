@@ -1,0 +1,26 @@
+<div class="mt__30">
+  <!-- <div class="flex flex-row mt-0">
+    <div class="col-11">
+      <h5 class="popupstyle m-0">Execution Logs</h5>
+    </div>
+    <div class="col-1">
+      <p-button styleClass="p-1 bg-transparent border-none text-color sidebarClose-btn" (click)="clickSidebar()">
+        <ng-template pTemplate="content">
+          <i class="pi pi-times fs"></i>
+        </ng-template>
+      </p-button>
+    </div>
+  </div> -->
+  <div class="card">
+    <!-- <div class="hr"></div> -->
+    <ng-scrollbar [appearance]="'standard'" style="height: calc(100vh - 5.25rem)">
+      <json-editor class="edtr" [options]="editorOptions" [data]="paramsDetails"> </json-editor>
+      <json-editor class="edtr" [options]="editorOptions" [data]="requestHeaderDetails"> </json-editor>
+      <!-- <p-tree [value]="treeData" styleClass="tree-design">
+        <ng-template let-node pTemplate="default">
+          <span class="node-leaft-custom" [innerHTML]="generateSplit(node.label)"></span>
+        </ng-template>
+      </p-tree> -->
+    </ng-scrollbar>
+  </div>
+</div>

@@ -1,0 +1,269 @@
+<div class="api-catqalog-auth-list">
+  <div class="page-container">
+    <div class="page-content-container">
+      <!-- <p-card styleClass="card-countInfo min-w p-card-height"> -->
+      <div class="p-4">
+        <!--  <h1 class="accHeading">ACCOUNTS</h1> -->
+        <div class="flex justify-content-end" style="height: 0">
+          <ul class="list-none p-0 m-0 flex justify-content-end">
+            <li class="mr-2">
+              <button class="publi-execute text-sm" pButton (click)="published()">
+                <img src="assets/images/doublearrow.svg" alt="" class="icon mr-2" /> Publish
+              </button>
+            </li>
+            <li>
+              <button class="publi-execute text-sm" pButton>
+                <img src="assets/images/executearrow.svg" alt="" class="icon mr-2" /> Execute
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="page-container-detailss">
+          <div class="page-container-details-headers">
+            <div class="tab-wrapper">
+              <p-tabView class="mw-tabview">
+                <p-tabPanel>
+                  <ng-template pTemplate="header"
+                    ><span class="p-tabview-title-container"><span class="p-tabview-title">AUTH</span></span></ng-template
+                  >
+                  <ng-template pTemplate="content">
+                    <div class="auth-tab pt-5">
+                      <div class="authSearch-section">
+                        <label class="top-label block mb-3">Select Auth</label>
+                        <div class="flex align-items-center gap-3">
+                          <!-- <div class="field mb-0 flex-grow-1 max-w-18rem">
+                                  <input type="text" placeholder="Search / Filter" class="w-100 field-h-40 fieldStl-1" pInputText />
+                                </div> -->
+                          <div class="field mb-0 flex-grow-l max-w-16rem">
+                            <div class="cstFld-search searchBtn">
+                              <input type="text" pInputText placeholder="Search" class="w-full field-h-40 searchField" />
+                              <div class="absolute right-0 top-0 h-full">
+                                <button type="button" pButton pRipple icon="pi pi-search" class="h-full fld-btn"></button>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <button (click)="createAuthModal()" class="addnewbtn" pButton pRipple>
+                              <i class="pi pi-plus mr-2"></i> Add New
+                            </button>
+                          </div>
+                          <div class="ml-auto max-w-15rem">
+                            <div class="api-grid" *ngIf="authDataByid">
+                              <div class="api-card-repoItem card-style2 cursor-pointer">
+                                <div class="card-bodyWrap">
+                                  <div class="card-header">
+                                    <div class="card-title t-transform-up" pTooltip="{{ authDataByid?.description }}" tooltipPosition="top">
+                                      {{ authDataByid?.description }}
+                                    </div>
+                                    <ul class="card-action-list">
+                                      <li>
+                                        <span (click)="edit(authDataByid, true)" class="btn-icon c-pointer"
+                                          ><i class="icon pi pi-pencil"></i
+                                        ></span>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="card-footerWrap">
+                                  <span class="tag">{{ authDataByid?.type }}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="api-grid" *ngIf="getDataValue">
+                              <div class="api-card-repoItem cursor-pointer">
+                                <div class="card-header">
+                                  <div class="card-title t-transform-up">{{ getDataValue?.description }}</div>
+                                  <ul class="card-action-list">
+                                    <li>
+                                      <span (click)="edit(getDataValue, true)" class="btn-icon c-pointer"
+                                        ><i class="icon pi pi-pencil"></i
+                                      ></span>
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div>
+                                  <span class="oAuth">{{ getDataValue?.type }}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <ng-scrollbar [appearance]="'standard'" class="scrollHV">
+                        <div class="mb-5 px-2" *ngFor="let item of authCollectionData | keyvalue">
+                          <div class="api-auth-heading flex align-items-center">
+                            <img src="assets/images/auth-icon.svg" alt="" class="icon" />
+                            <div class="text-sm flex-grow-1 font-bold">{{ item.key }}</div>
+                          </div>
+                          <div class="api-grid" *ngIf="item.key !== 'No Auth'">
+                            <div class="api-card-repoItem card-style2 cursor-pointer" *ngFor="let value of $any(item).value">
+                              <div class="card-bodyWrap">
+                                <div class="card-header">
+                                  <div class="card-title t-transform-up" pTooltip="{{ value.description }}" tooltipPosition="top">
+                                    {{ value.description }}
+                                  </div>
+                                  <ul class="card-action-list">
+                                    <!-- <li class="pr-2">
+                                      <span class="btn-icon c-pointer" (click)="dropdownclick($event); card.isFavourite = !card.isFavourite"
+                                        ><i class="icon pi" [ngClass]="card.isFavourite ? 'pi-heart-fill' : 'pi-heart'"></i
+                                      ></span>
+                                    </li> -->
+                                    <li>
+                                      <span (click)="edit(value, true)" class="btn-icon c-pointer"><i class="icon pi pi-pencil"></i></span>
+                                      <!-- <span (click)="dropdownclick($event); menu.toggle($event)" class="btn-icon c-pointer">
+                                        <i class="icon pi pi-pencil"></i>
+                                      </span>
+                                      <p-menu
+                                        [showTransitionOptions]="'0ms'"
+                                        [hideTransitionOptions]="'0ms'"
+                                        #menu
+                                        [popup]="true"
+                                        [model]="menuitems"
+                                        appendTo="body"
+                                      ></p-menu> -->
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="card-footerWrap">
+                                <span class="tag">{{ value.type }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="api-grid" *ngIf="item.key === 'No Auth'">
+                            <div class="api-card-repoItem cursor-pointer">
+                              <div class="card-header">
+                                <div class="card-title t-transform-up">{{ $any(item).value[0].description }}</div>
+                              </div>
+                              <div>
+                                <span class="oAuth">{{ $any(item).value[0].type }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- <div class="mb-5 px-2">
+                                <div class="api-auth-heading flex align-items-center">
+                                    <img src="assets/images/auth-icon.svg" alt="" class="icon" />
+                                    <div class="text-sm flex-grow-1 font-bold">BearerToken (15)</div>
+                                  </div>
+                              </div>
+                              <div class="api-grid">
+                                <div
+                                  class="api-card-repoItem cursor-pointer"
+                                  *ngFor="let card of cardData2; let i = index"
+                                >
+                                  <div class="card-header">
+                                      <div class="card-title">{{ card.name }}</div>
+                                    <ul class="card-action-list">
+                                      <li class="pr-2">
+                                        <span
+                                          class="btn-icon c-pointer"
+                                          (click)="dropdownclick($event); card.isFavourite = !card.isFavourite"
+                                          ><i
+                                            class="icon pi"
+                                            [ngClass]="card.isFavourite ? 'pi-heart-fill' : 'pi-heart'"
+                                          ></i
+                                        ></span>
+                                      </li>
+                                      <li>
+                                        <span class="btn-icon c-pointer"
+                                          ><i
+                                            class="pi pi-pencil"
+                                            (click)="dropdownclick($event); menu.toggle($event)"
+                                          ></i
+                                        ></span>
+                                        <p-menu
+                                          #menu
+                                          [popup]="true"
+                                          [model]="menuitems2"
+                                          appendTo="body"
+                                        ></p-menu>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <div>
+                                    <span class="oAuth">{{ card.isStatus }}</span>
+                                  </div>
+                                </div>
+                              </div> -->
+                      </ng-scrollbar>
+                    </div>
+                  </ng-template>
+                </p-tabPanel>
+                <p-tabPanel>
+                  <ng-template pTemplate="header"
+                    ><span class="p-tabview-title-container"><span class="p-tabview-title">SETTINGS</span></span></ng-template
+                  >
+                  <ng-template pTemplate="content">
+                    <div class="auth-setting pt-5">
+                      <div class="mb-4">
+                        <div class="grid grid-nogutter">
+                          <div class="col-12 sm:col-7">
+                            <div class="field mb-0">
+                              <label class="top-label mb-2">Base URL</label>
+                              <input type="text" class="Auth-Url" placeholder="Base URL" class="w-100" pInputText />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <label class="top-label block mb-2">Access</label>
+                      <div>
+                        <div class="flex gap-3 align-items-center">
+                          <div class="labelBtn">Private</div>
+                          <div>
+                            <label class="switch">
+                              <input type="checkbox" />
+                              <span class="slider round"></span>
+                            </label>
+                          </div>
+                          <div class="labelBtn">Team Workspace</div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-tabPanel>
+              </p-tabView>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- </p-card> -->
+    </div>
+  </div>
+</div>
+<p-sidebar [(visible)]="openSidebar" [styleClass]="'drawer-wrapper ' + sidebarclass" [blockScroll]="true" position="right">
+  <ng-container>
+    <!-- <api-catalog-create-auth [isEdit]="enableEdit" (createAuthData)="onchange($event)" (cancel)="removesidebar()"></api-catalog-create-auth> -->
+    <api-catalog-create-auth
+      [isEdit]="enableEdit"
+      [currentDataGet]="editData"
+      (createAuthData)="onchange($event)"
+      (cancel)="removesidebar()"
+    ></api-catalog-create-auth>
+    <!-- <api-catalog-edit-auth (cancel)="removesidebar()" *ngSwitchCase="'editAuthModal'"></api-catalog-edit-auth> -->
+  </ng-container>
+</p-sidebar>
+<!-- <p-sidebar
+  [(visible)]="createAuthModal"
+  [style]="{ width: '60rem' }"
+  styleClass="p-sidebar-md lg-sidebar-mng sidebar-content-p-0 hide-sidebar-header"
+  [modal]="true"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <api-catalog-create-auth></api-catalog-create-auth>
+</p-sidebar>
+<p-sidebar
+  [(visible)]="editAuthModal"
+  [style]="{ width: '60rem' }"
+  styleClass="p-sidebar-md lg-sidebar-mng sidebar-content-p-0 hide-sidebar-header"
+  [modal]="true"
+  position="right"
+  [showCloseIcon]="false"
+>
+  <api-catalog-edit-auth></api-catalog-edit-auth>
+</p-sidebar> -->

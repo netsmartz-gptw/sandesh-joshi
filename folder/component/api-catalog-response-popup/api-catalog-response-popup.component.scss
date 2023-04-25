@@ -1,0 +1,55 @@
+.popup-Response {
+  .fs {
+    font-size: 20px;
+  }
+  .hr {
+    color: #aab2c5;
+    height: 2px;
+    margin-top: 2px;
+    width: 94%;
+    margin-left: 12px;
+    margin-bottom: 2em;
+  }
+  .grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(173px, 1fr));
+    grid-gap: 25px;
+  }
+  .grid2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+  }
+  .popupstyle {
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--color-grey);
+  }
+  .boxline {
+    // border: 1px solid #AAB2C5;
+    height: 40em;
+    border-radius: 10px;
+    .jsontree {
+      // padding: 20px;
+      .overflow {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        .clr-rd {
+          color: #fd346e;
+        }
+        .clr-bl {
+          color: #3448fa;
+        }
+      }
+    }
+  }
+  .p-button.p-button-outlined {
+    background: #3d455b !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+}

@@ -1,0 +1,157 @@
+<div class="drawe-content-container h-100">
+  <div class="drawer-content-header">
+    <div class="api-card-repoItem card-style2 card-width">
+      <div class="card-bodyWrap">
+        <div class="card-header">
+          <div class="card-title t-transform-up" pTooltip="{{ apitestdetail?.name }}" tooltipPosition="top">{{ apitestdetail?.name }}</div>
+          <ul class="card-action-list">
+            <li>
+              <span class="btn-icon c-pointer"><i class="icon pi pi-heart"></i></span>
+            </li>
+            <li>
+              <span class="btn-icon c-pointer"><i class="icon pi pi-ellipsis-v"></i></span>
+              <p-menu #menu [popup]="true" appendTo="body"></p-menu>
+            </li>
+          </ul>
+        </div>
+        <div class="card-row-dropdown mt__10">
+          <p-dropdown [options]="apitestdetail?.revision" (onChange)="createNewVersion($event)" styleClass="card-p-dropdown"> </p-dropdown>
+        </div>
+      </div>
+      <div class="card-footerWrap">
+        <span class="tag uppercase" [ngClass]="apitestdetail?.architecture">{{ apitestdetail?.architecture }}</span>
+        <div class="card-details line-height-1 ml-auto"><span class="text-number"> 21 </span><span class="text-label">API</span></div>
+      </div>
+    </div>
+
+    <div class="execution-details">
+      <!-- <span>Last 5 Exections</span>
+      <div class="details-status">
+        <div class="inline-status">
+          <div class="col-item">
+            <div class="image">
+              <i class="icon circle-check icon-color-green"></i>
+            </div>
+          </div>
+          <div class="col-item">
+            <div class="image">
+              <i class="icon circle-check icon-color-green"></i>
+            </div>
+          </div>
+          <div class="col-item">
+            <div class="image">
+              <i class="icon circle-check icon-color-green"></i>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="image">
+              <i class="icon octagon-cancel icon-color-red"></i>
+            </div>
+          </div>
+          <div class="col-item">
+            <div class="image">
+              <i class="icon octagon-cancel icon-color-red"></i>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <div class="drawer-content-body">
+    <ng-scrollbar [appearance]="'standard'" style="height: calc(100vh - 325px)">
+      <div class="summary-details px-0">
+        <div class="summary-heading">
+          <span>Summary</span>
+          <span>
+            <!-- <p-button type="button" class="primary-button mr__15" label="View Execution History"></p-button
+            > -->
+            <!-- <p-button label="Published" icon=""></p-button> -->
+            <button class="publi-execute text-sm" pButton (click)="published()">
+              <img src="assets/images/doublearrow.svg" alt="" class="icon mr-2" /> Publish
+            </button>
+          </span>
+        </div>
+        <div class="summary-wrapper">
+          <div class="summary-item">
+            <span class="summary-item-title">Last Updated</span>
+            <span class="summary-item-data">05/07/2022</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-item-title">API Count</span>
+            <span class="summary-item-data">23</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-item-title">Author</span>
+            <span class="summary-item-data">Krishna</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-item-title">Active </span>
+            <span class="summary-item-data">Yes</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-item-title">Source </span>
+            <span class="summary-item-data">Automation</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-item-title">Published</span>
+            <span class="summary-item-data">No</span>
+            <!-- <span class="summary-item-data">
+              <span class="switch-wraper">
+                <span class="toggle-switch"
+                  ><input type="checkbox" [readonly]="true" [disabled]="true" [checked]="true" id="switch" /><label for="switch"></label
+                ></span>
+              </span>
+            </span> -->
+          </div>
+        </div>
+      </div>
+      <div class="form-wrapper mt__30 w-70">
+        <label class="form-label">Catalog Summary</label>
+        <textarea class="form-control w-100" [rows]="6" [cols]="30" pInputTextarea [autoResize]="false"></textarea>
+      </div>
+      <div class="form-wrapper mt__30 w-70">
+        <label class="form-label"><i class="icon tag mr__1"></i> Tags<span class="text-pink-500">*</span></label>
+        <p-multiSelect
+          class="w-100"
+          styleClass="form-control w-100"
+          id="form-tag"
+          placeholder="Select list of Objective Tags or create..."
+          [options]="api_tags"
+          optionLabel="name"
+          appendTo="body"
+          display="chip"
+        ></p-multiSelect>
+      </div>
+      <!-- <div class="form-wrapper plr_15 mt__30 w-70">
+        <label class="form-label">Link to functional Test Pack</label>
+        <p-multiSelect
+          class="w-100"
+          styleClass="form-control w-100"
+          id="form-tag"
+          [options]="api_tags"
+          appendTo="body"
+          [(ngModel)]="selectedTags"
+          placeholder="Choose Tags"
+          optionLabel="name"
+          dropdownIcon="icon link"
+          display="chip"
+        ></p-multiSelect>
+      </div> -->
+      <div class="flex justify-content-center" style="height: 0">
+        <ul class="list-none p-0 m-0 flex justify-content-end">
+          <li class="mr-2 mt-3">
+            <button class="publi-execute text-sm" pButton (click)="deleteAPITest()">
+              <span class="btn-icon c-pointer"><i class="icon delete mr-2"></i></span>
+              Delete
+            </button>
+          </li>
+        </ul>
+      </div>
+    </ng-scrollbar>
+    <div class="drawer-form-button pt__20 pb__20 mt__20">
+      <span role="button" class="button-cirle-darkgrey" (click)="cancelScreen()"><i class="pi pi-times"></i></span
+      ><span role="button" class="button-cirle-darkgrey"><i class="pi pi-check"></i></span>
+    </div>
+  </div>
+</div>

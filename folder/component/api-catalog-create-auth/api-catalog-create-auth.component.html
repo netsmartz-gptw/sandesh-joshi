@@ -1,0 +1,784 @@
+<div class="createAuth-sidebar h-full flex flex-column pb-3">
+  <!-- <div class="px-4 xl:px-5 pt-4 pb-5">
+    <div class="grid mt-0 align-items-center">
+      <div class="col py-0"><h5 class="text-xl font-bold my-0">Create Auth</h5></div>
+      <div class="col-fixed py-0">
+        <p-button styleClass="btn-round-Icon">
+          <ng-template pTemplate="content">
+            <svg class="icon" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M1.75732 18.9852L4.02006 10.4999L1.75732 2.01459L18.7279 10.4999L1.75732 18.9852Z"
+                stroke="white"
+                stroke-width="2"
+                stroke-miterlimit="10"
+              />
+              <path d="M4.58569 10.4999H11.6568" stroke="white" stroke-width="2" stroke-miterlimit="10" />
+            </svg>
+          </ng-template>
+        </p-button>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="flex-grow-1 flex flex-column">
+    <div class="flex-grow-1 relative">
+      <form [formGroup]="createFromAuthCatalog">
+        <div class="absolute top-0 bottom-0 w-full overflow-x-hidden overflow-y-auto cstScroll-style">
+          <div class="px-4 xl:px-5">
+            <div class="form-topRow">
+              <div class="grid justify-content-between">
+                <div class="col-6">
+                  <div class="field mb-2 lg:mr-4">
+                    <label class="block text-base font-bold text-light-2 mb-1">Auth name</label>
+                    <input
+                      type="text"
+                      formControlName="description"
+                      pInputText
+                      placeholder="Enter Auth Name"
+                      class="w-full placeholder-dark"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="field mb-2 lg:ml-4">
+                    <label class="block text-base font-bold text-light-2 mb-1">Select Auth Type</label>
+                    <p-dropdown
+                      formControlName="type"
+                      selected="authType"
+                      [options]="dropdown"
+                      placeholder="Select from the List"
+                      styleClass="w-full"
+                      (onChange)="onselectAuth($event)"
+                    >
+                    </p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Auth -->
+            <div *ngIf="auth1">
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-xs auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-11rem">Name</th>
+                      <th>Role</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td class="text-black">Grant_type</td>
+                      <td class="py-1">
+                        <!-- <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Client_crederntial"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div> -->
+                        <div class="field mb-0 max-w-14rem">
+                          <p-dropdown
+                            formControlName="grantType"
+                            selected="grantType"
+                            [options]="grantTypeDropdown"
+                            (onChange)="onselectKey($event)"
+                            placeholder="Select"
+                            styleClass="w-full placeholder-dark field-h-40 text-xs"
+                            scrollHeight="9.375rem"
+                          >
+                          </p-dropdown>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-black">Username</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            formControlName="userName"
+                            pInputText
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-black">Password</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            formControlName="password"
+                            pInputText
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+
+              <hr class="hr-cardSperator mt-5 mb-6" />
+              <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-sm auth-Table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th class="w-11rem">Field</th>
+                    <th>Value</th>
+                    <th class="w-3rem"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                  <tr>
+                    <td class="text-black vertical-align-top">access_token</td>
+                    <td style="word-break: break-all">
+                      eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfVUlPV3hGVkFEZjhDeGxxbW91V1JWZzlXWjg1dGd2RUd3OUVvZlByY0RrIn0.eyJleHAiOjE2NjAzMDk3OTUsImlhdCI6MTY2MDMwOTQ5NSwianRpIjoiOTU3MTA2ODYtMWY0Mi00YzI1LWE0ZDgtZDM3MjU3MWZlMGJlIiwiaXNzIjoiaHR0cDovLzE3Mi4xNi4yNC4yNzo5MDgwL2F1dGgvcmVhbG1zL2poaXBzdG...
+                    </td>
+                    <td>
+                      <svg
+                        ngxClipboard
+                        [cbContent]="value"
+                        width="23"
+                        height="24"
+                        viewBox="0 0 23 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M5.69995 14.9004H13.4" stroke="#3D455B" stroke-width="1.9091" stroke-miterlimit="10" />
+                        <path d="M9.5 11V18.7" stroke="#3D455B" stroke-width="1.9091" stroke-miterlimit="10" />
+                        <path
+                          d="M20 22.4992H2.9C1.9 22.4992 1 21.5992 1 20.5992V7.19922H18.2V20.5992C18.1 21.5992 19 22.4992 20 22.4992Z"
+                          stroke="#3D455B"
+                          stroke-width="1.9091"
+                          stroke-miterlimit="10"
+                        />
+                        <path
+                          d="M22 3.39999V20.6C22 21.7 21.1 22.5 20.1 22.5C19.1 22.5 18.2001 21.6 18.2001 20.6V7.2H4.80005V1.5H14.3L16.2001 3.39999H22Z"
+                          stroke="#3D455B"
+                          stroke-width="1.9091"
+                          stroke-miterlimit="10"
+                        />
+                      </svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-black">expires in</td>
+                    <td>300</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="text-black">refresh_expires_in</td>
+                    <td>0</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="text-black">token_type</td>
+                    <td>Bearer</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="text-black">scope</td>
+                    <td>email profile</td>
+                    <td></td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+            <!-- End No Auth -->
+
+            <!-- Basic Auth -->
+            <div *ngIf="auth2">
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-xs auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-4rem">
+                        <p-checkbox name="authCheck-Auth-list" value="authCheck-Auth-list-HeadCheck"></p-checkbox>
+                      </th>
+                      <th class="w-11rem">Name</th>
+                      <th>Value</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td>
+                        <p-checkbox name="authCheck-Auth-list" value="authCheck-Auth-list-1" formControlName="customcheckbox"></p-checkbox>
+                      </td>
+                      <td class="text-black">Username</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            formControlName="userName"
+                            pInputText
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox name="authCheck-list" value="authCheck-Auth-list-2" formControlName="customcheckbox"></p-checkbox>
+                      </td>
+                      <td class="text-black">Password</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            formControlName="password"
+                            pInputText
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+            <!-- End Basic Auth -->
+
+            <!-- Bearer Token -->
+            <div *ngIf="auth3">
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-xs auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-4rem">
+                        <p-checkbox
+                          name="authCheck-Token-list"
+                          value="authCheck-Token-list-HeadCheck"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </th>
+                      <th class="w-11rem">Name</th>
+                      <th>Value</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Token-list"
+                          value="authCheck-Token-list-1"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Token</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Admin"
+                            formControlName="token"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+            <!-- End Bearer Token -->
+            <!-- API Key -->
+            <div *ngIf="auth4">
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-xs tableScroll auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-4rem">
+                        <p-checkbox
+                          name="authCheck-APIKey-list"
+                          value="authCheck-APIKey-list-HeadCheck"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </th>
+                      <th class="w-11rem">Name</th>
+                      <th>Value</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-APIKey-list"
+                          value="authCheck-APIKey-list-1"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Key</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            formControlName="key"
+                            pInputText
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-APIKey-list"
+                          value="authCheck-APIKey-list-2"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Value</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Admin"
+                            formControlName="value"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td class="text-black">Add To</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <p-dropdown
+                            formControlName="includeKeyAs"
+                            selected="keyType"
+                            [options]="apiKeyOptions"
+                            (onChange)="onselectKey($event)"
+                            placeholder="Select"
+                            styleClass="w-full placeholder-dark field-h-40 text-xs"
+                            scrollHeight="9.375rem"
+                          >
+                          </p-dropdown>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+            <!-- End API Key -->
+            <!-- Digest Auth -->
+            <div *ngIf="auth5">
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-xs auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-4rem">
+                        <p-checkbox
+                          name="authCheck-DigestAuth-list"
+                          value="authCheck-DigestAuth-list-HeadCheck"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </th>
+                      <th class="w-11rem">Name</th>
+                      <th>Role</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-DigestAuth-list"
+                          value="authCheck-DigestAuth-list-1"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Realm</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Client_crederntial"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-DigestAuth-list"
+                          value="authCheck-DigestAuth-list-2"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Nonce</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText placeholder="Admin" class="w-full text-xs field-h-40 placeholder-dark" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-DigestAuth-list"
+                          value="authCheck-DigestAuth-list-3"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Algorithm</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <p-dropdown
+                            [options]="dropdownOptions"
+                            optionLabel="name"
+                            placeholder="Select"
+                            styleClass="w-full placeholder-dark field-h-40 text-xs"
+                            scrollHeight="9.375rem"
+                          >
+                          </p-dropdown>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-DigestAuth-list"
+                          value="authCheck-DigestAuth-list-4"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Nonce Count</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText placeholder="Admin" class="w-full text-xs field-h-40 placeholder-dark" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-DigestAuth-list"
+                          value="authCheck-DigestAuth-list-5"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Client Nonce</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText placeholder="Admin" class="w-full text-xs field-h-40 placeholder-dark" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-DigestAuth-list"
+                          value="authCheck-DigestAuth-list-6"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Opaque</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText placeholder="Admin" class="w-full text-xs field-h-40 placeholder-dark" />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+            <!-- End Digest Auth -->
+            <!-- Oauth1 -->
+            <div *ngIf="auth6">
+              <div class="field mb-5">
+                <label class="block text-base font-bold mb-1">Auth URL </label>
+                <input type="text" pInputText formControlName="authorizationUrl" class="w-full placeholder-dark" />
+              </div>
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-xs auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-4rem">
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-HeadCheck"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </th>
+                      <th class="w-11rem">Name</th>
+                      <th>Role</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td>
+                        <p-checkbox name="authCheck-Oauth1-list" value="authCheck-Oauth1-list-1"></p-checkbox>
+                      </td>
+                      <td class="text-black">Signature Method</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            placeholder="Client_crederntial"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox name="authCheck-Oauth1-list" value="authCheck-Oauth1-list-2"></p-checkbox>
+                      </td>
+                      <td class="text-black">Consumer Key</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText placeholder="Admin" class="w-full text-xs field-h-40 placeholder-dark" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox name="authCheck-Oauth1-list" value="authCheck-Oauth1-list-3"></p-checkbox>
+                      </td>
+                      <td class="text-black">Consumer Secret</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <p-dropdown
+                            [options]="dropdownOptions"
+                            optionLabel="name"
+                            placeholder="Select"
+                            styleClass="w-full placeholder-dark field-h-40 text-xs"
+                            scrollHeight="9.375rem"
+                          >
+                          </p-dropdown>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-4"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Access Token</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText placeholder="Admin" class="w-full text-xs field-h-40 placeholder-dark" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-5"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Token Secret</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText placeholder="Admin" class="w-full text-xs field-h-40 placeholder-dark" />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+            <!-- End Oauth1 -->
+            <!-- Oauth2 -->
+            <div *ngIf="auth7">
+              <div class="field mb-5">
+                <label class="block text-base font-bold mb-1">Auth URL </label>
+                <input type="text" pInputText formControlName="authorizationUrl" class="w-full placeholder-dark" />
+              </div>
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-xs auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-4rem">
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-HeadCheck"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </th>
+                      <th class="w-11rem">Name</th>
+                      <th>Role</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-1"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Grant_type</td>
+                      <td class="py-1">
+                        <!-- <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="grantType"
+                            placeholder="Client_crederntial"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div> -->
+                        <div class="field mb-0 max-w-14rem">
+                          <p-dropdown
+                            formControlName="grantType"
+                            selected="grantType"
+                            [options]="grantTypeDropdown"
+                            (onChange)="onselectKey($event)"
+                            placeholder="Select"
+                            styleClass="w-full placeholder-dark field-h-40 text-xs"
+                            scrollHeight="9.375rem"
+                          >
+                          </p-dropdown>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-2"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Username</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="userName"
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-4"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Password</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            formControlName="password"
+                            pInputText
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-5"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Client ID</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="clientId"
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p-checkbox
+                          name="authCheck-Oauth1-list"
+                          value="authCheck-Oauth1-list-5"
+                          formControlName="customcheckbox"
+                        ></p-checkbox>
+                      </td>
+                      <td class="text-black">Client Secret</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            formControlName="clientSecret"
+                            placeholder="Admin"
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+            <!-- End Oauth2 -->
+            <div *ngIf="!auth1">
+              <hr class="hr-cardSperator mt-5 mb-6" />
+
+              <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-sm auth-Table">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th class="w-11rem">Name</th>
+                    <th>Field</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                  <tr>
+                    <td class="text-black">Authenticated</td>
+                    <td>True</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="px-4 xl:px-5 pt-3">
+    <ul class="list-none p-0 m-0 flex justify-content-end">
+      <li class="pr__20">
+        <button
+          pButton
+          pRipple
+          icon="pi pi-arrow-left"
+          label="Cancel"
+          class="p-button-lg font-bold btn-min-W"
+          (click)="cancelScreen()"
+        ></button>
+      </li>
+      <li><button pButton pRipple label="Save" class="p-button-lg font-bold btn-min-W" (click)="createAuthCatalog()"></button></li>
+    </ul>
+  </div>
+</div>

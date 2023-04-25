@@ -1,0 +1,233 @@
+<div class="createAuth-sidebar h-full flex flex-column pb-3">
+  <div class="h-full flex flex-column">
+    <!-- <div class="pb-4">
+      <div class="grid2 mt-0 align-items-center">
+        <div class="col py-0"><h5 class="popupstyle m-0">Edit Auth</h5></div>
+        <div class="col-fixed py-0">
+          <p-button styleClass="p-1 bg-transparent border-none text-color sidebarClose-btn">
+            <ng-template pTemplate="content">
+              <img class="icon" src="assets/images/popup-arrow-close.svg" alt="" />
+            </ng-template>
+          </p-button>
+        </div>
+      </div>
+    </div> -->
+    <div class="sidebar-header sidebar-px">
+      <div class="grid mt-0 align-items-center">
+        <div class="col py-0"><h5 class="sidebar-title m-0">Edit Auth</h5></div>
+        <div class="col-fixed py-0">
+          <p-button styleClass="btn-circle-icon">
+            <ng-template pTemplate="content">
+              <svg class="icon" width="28" height="26" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M8.75687 21.4852L11.0196 12.9999L8.75687 4.51461L25.7274 12.9999L8.75687 21.4852Z"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-miterlimit="10"
+                />
+                <path d="M11.5853 12.9999H18.6564" stroke="white" stroke-width="2" stroke-miterlimit="10" />
+              </svg>
+            </ng-template>
+          </p-button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-grow-1 flex flex-column">
+      <div class="flex-grow-1 relative">
+        <div class="absolute top-0 bottom-0 w-full overflow-x-hidden overflow-y-auto cstScroll-style">
+          <div class="sidebar-px">
+            <div class="form-topRow">
+              <div class="grid justify-content-between">
+                <div class="col-6">
+                  <div class="field mb-2 lg:mr-4">
+                    <label class="block text-base font-bold text-light-2 mb-1">Auth name</label>
+                    <input type="text" placeholder="Enter Auth Name" class="w-full placeholder-dark" pInputText />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="field mb-2 lg:ml-4">
+                    <label class="block text-base font-bold text-light-2 mb-1">Select Auth Type</label>
+                    <p-dropdown
+                      [(ngModel)]="auth_type"
+                      [options]="dropdown"
+                      optionLabel="name"
+                      placeholder="Select from the List"
+                      styleClass="w-full"
+                    >
+                    </p-dropdown>
+                    <!-- <input type="text" placeholder="Select from the List" class="w-100" pInputText /> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field mb-4">
+              <label class="block text-base font-bold mb-1">Auth URL </label>
+              <input
+                type="text"
+                placeholder="http://3.108.86.123:9080/auth/realms/jhipster/protocol/openid-connect/token"
+                class="w-full placeholder-dark"
+                pInputText
+              />
+            </div>
+
+            <div class="pb-4">
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-sm auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="w-4rem">
+                        <p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox>
+                      </th>
+                      <th>Name</th>
+                      <th>Role</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td><p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox></td>
+                      <td class="text-black">Grant_type</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input
+                            type="text"
+                            pInputText
+                            class="w-full text-xs field-h-40 placeholder-dark"
+                            placeholder="Client_crederntial"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox></td>
+                      <td class="text-black">Username</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText class="w-full text-xs field-h-40 placeholder-dark" placeholder="Admin" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox></td>
+                      <td class="text-black">Password</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText class="w-full text-xs field-h-40 placeholder-dark" placeholder="Admin" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox></td>
+                      <td class="text-black">Username</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText class="w-full text-xs field-h-40 placeholder-dark" placeholder="Admin" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox></td>
+                      <td class="text-black">Password</td>
+                      <td class="py-1">
+                        <div class="field mb-0 max-w-14rem">
+                          <input type="text" pInputText class="w-full text-xs field-h-40 placeholder-dark" placeholder="Admin" />
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+
+            <div class="pb-4">
+              <p-card class="card-Auth">
+                <p-table [value]="tablecontent" responsiveLayout="scroll" styleClass="text-sm auth-Table tableScroll-mng">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="left-radius secondTableth">Field</th>
+                      <th>Value</th>
+                      <th class="right-radius"></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-product>
+                    <tr>
+                      <td class="text-black vertical-align-top">access_token</td>
+                      <td style="word-break: break-all">
+                        eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfVUlPV3hGVkFEZjhDeGxxbW91V1JWZzlXWjg1dGd2RUd3OUVvZlByY0RrIn0.eyJleHAiOjE2NjAzMDk3OTUsImlhdCI6MTY2MDMwOTQ5NSwianRpIjoiOTU3MTA2ODYtMWY0Mi00YzI1LWE0ZDgtZDM3MjU3MWZlMGJlIiwiaXNzIjoiaHR0cDovLzE3Mi4xNi4yNC4yNzo5MDgwL2F1dGgvcmVhbG1zL2poaXBzdG...
+                      </td>
+                      <td class="secondTabletd">
+                        <svg
+                          ngxClipboard
+                          [cbContent]="value"
+                          class="cursor-pointer"
+                          width="23"
+                          height="24"
+                          viewBox="0 0 23 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M5.69995 14.9004H13.4" stroke="#3D455B" stroke-width="1.9091" stroke-miterlimit="10" />
+                          <path d="M9.5 11V18.7" stroke="#3D455B" stroke-width="1.9091" stroke-miterlimit="10" />
+                          <path
+                            d="M20 22.4992H2.9C1.9 22.4992 1 21.5992 1 20.5992V7.19922H18.2V20.5992C18.1 21.5992 19 22.4992 20 22.4992Z"
+                            stroke="#3D455B"
+                            stroke-width="1.9091"
+                            stroke-miterlimit="10"
+                          />
+                          <path
+                            d="M22 3.39999V20.6C22 21.7 21.1 22.5 20.1 22.5C19.1 22.5 18.2001 21.6 18.2001 20.6V7.2H4.80005V1.5H14.3L16.2001 3.39999H22Z"
+                            stroke="#3D455B"
+                            stroke-width="1.9091"
+                            stroke-miterlimit="10"
+                          />
+                        </svg>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-black">expires in</td>
+                      <td>300</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="text-black">refresh_expires_in</td>
+                      <td>0</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="text-black">token_type</td>
+                      <td>Bearer</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="text-black">scope</td>
+                      <td>email profile</td>
+                      <td></td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-px pt-3">
+      <ul class="list-none p-0 m-0 flex justify-content-end">
+        <li class="pr-4">
+          <button
+            (click)="cancelScreen()"
+            pButton
+            icon="pi pi-arrow-left"
+            iconPos="left"
+            type="button"
+            class="p-button-lg font-bold btn-min-W"
+            label="Cancel"
+          ></button>
+        </li>
+        <li><button pButton pRipple label="Save" class="p-button-lg font-bold btn-min-W"></button></li>
+      </ul>
+    </div>
+  </div>
+</div>

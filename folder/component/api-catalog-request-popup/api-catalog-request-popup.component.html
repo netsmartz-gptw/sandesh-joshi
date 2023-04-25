@@ -1,0 +1,39 @@
+<div class="popup">
+  <ng-scrollbar [appearance]="'standard'" style="height: calc(100vh - 170px)">
+    <div class="p-3">
+      <div class="jsontree p-2 mt-1">
+        <!-- <div [ngSwitch]="activeIndex"> -->
+        <!-- <json-editor *ngSwitchCase="0" class="editor" [options]="editorOptions" [data]="data"> </json-editor> -->
+        <!-- <json-editor class="editor" style="height: 100%" [options]="editorOptions" [data]="inputData"> </json-editor> -->
+        <!-- </div> -->
+        <json-editor class="editor" style="height: 100%" [options]="editorOptions2" [data]="inputData" (change)="onChangeJson($event)">
+        </json-editor>
+      </div>
+    </div>
+  </ng-scrollbar>
+  <div class="pt-6">
+    <ul class="list-none p-0 m-0 flex justify-content-end">
+      <li class="pr-4">
+        <button
+          (click)="cancelScreen()"
+          pButton
+          pRipple
+          label="Close"
+          styleClass="p-button-lg"
+          iconPos="left"
+          class="p-button-outlined p-button-lg font-bold"
+        ></button>
+      </li>
+      <li>
+        <button
+          pButton
+          pRipple
+          label="Save"
+          (click)="saveResponse()"
+          class="p-button-outlined p-button-lg font-bold"
+          style="width: 110px"
+        ></button>
+      </li>
+    </ul>
+  </div>
+</div>

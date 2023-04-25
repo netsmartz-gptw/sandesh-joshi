@@ -1,0 +1,191 @@
+@import '../../../../../../assets/theme/scss/mixins.scss';
+.card-create-new-button {
+  min-height: 7.313rem;
+}
+.page-container {
+  .page-container-data {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    .scroll-Inside-PD {
+      padding: 0 0.625rem 0.938rem 0.625rem;
+    }
+  }
+}
+
+.add-btn {
+  width: 3em;
+}
+.p-input-icon-right > i:last-of-type {
+  // right: 4.75rem !important;
+  color: #b2b2b2;
+}
+.filterBtn {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 0;
+  padding: 0.8rem;
+}
+.p-input {
+  border: 0 !important;
+}
+
+.card-wrapper {
+  @include flexbox($alignItems: center, $gap: 1.563rem);
+  .card {
+    min-width: 11.375rem;
+  }
+}
+.card-inner {
+  position: relative;
+  min-height: 6.875rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+  @include devices(medium) {
+    padding: 1rem;
+    min-height: 6rem;
+  }
+  &::before {
+    content: '';
+    height: 9.625rem;
+    width: 8.313rem;
+    border-radius: 100%;
+    position: absolute;
+    left: -2.813rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  &.card-inner-circle-orange {
+    &::before {
+      background: rgba(255, 240, 225, 0.38);
+    }
+  }
+  &.card-inner-circle-green {
+    &::before {
+      background: #e7fff0;
+    }
+  }
+  &.card-inner-circle-red {
+    &::before {
+      background-color: rgba(247, 223, 224, 0.38);
+    }
+  }
+  &.card-inner-circle-violet {
+    &::before {
+      background: rgba(234, 226, 255, 0.38);
+    }
+  }
+  .card-content {
+    position: relative;
+    z-index: 1;
+    @include flexbox($alignItems: center, $gap: 2.5rem);
+    @include devices(medium) {
+      gap: 2.25rem;
+    }
+    .card-icon {
+      font-size: 2.375rem;
+      min-width: 2.75rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-text {
+      @include flexbox($direction: column);
+      .c-text {
+        @include fontfamily($size: 1rem, $color: var(--color-light-grey));
+        @include devices(medium) {
+          font-size: 0.875rem;
+        }
+      }
+      .c-number {
+        @include fontfamily($size: 1.75rem, $weight: 700);
+      }
+    }
+  }
+}
+
+.grid-card-wrapper {
+  @include grid('grid-template-columns', 'repeat(auto-fill, minmax(16.25rem, 1fr))', 1.563rem, 1.563rem);
+  @include devices(medium) {
+    @include grid('grid-template-columns', 'repeat(auto-fill, minmax(14.375rem, 1fr))', 1rem, 1rem);
+  }
+  @include devices(medium4k) {
+    @include grid('grid-template-columns', 'repeat(auto-fill, minmax(15.75rem, 1fr))', 1rem, 1rem);
+  }
+
+  .card-inner-data {
+    @include flexbox($direction: column, $justifyContent: space-between);
+    height: 100%;
+  }
+  .card-footer-align {
+    justify-content: flex-start;
+    padding: 0 0.625em;
+  }
+  .card-header {
+    padding: 0px !important;
+    margin-bottom: 0 !important;
+    background-color: rgb(0 0 0 / 0%) !important;
+    border-bottom: none !important;
+  }
+  .card-footer {
+    background-color: rgb(0 0 0 / 0%) !important;
+    border-top: none !important;
+  }
+  .p-input-filled .p-dropdown .p-dropdown-label.p-placeholder {
+    color: #020202 !important;
+  }
+  .p-input-filled .p-inputtext {
+    background-color: #e3e5ed00 !important;
+    border-color: transparent !important;
+  }
+  .tag {
+    width: fit-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize;
+    &.orange {
+      color: #fd8313;
+    }
+
+    &.purple,
+    &.SOAP {
+      color: #7a50f3;
+    }
+  }
+  .api-display {
+    @include fontfamily($size: 1rem, $weight: 700, $color: var(--color-black));
+  }
+  .api-text-display {
+    color: var(--color-Gray67);
+    padding: 0 0.313rem;
+  }
+}
+.car-min-height {
+  height: 10rem;
+  @include devices(medium) {
+    height: 9rem;
+  }
+}
+
+.card-title {
+  @include fontfamily($size: 1rem, $weight: 400, $color: var(--color-grey));
+  @include devices(medium) {
+    @include fontfamily($size: 0.875rem, $weight: 400, $color: var(--color-grey));
+  }
+}
+
+.ellipse-cs {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 14em;
+  overflow: hidden;
+}
+:host ::ng-deep .p-menu.p-menu-overlay {
+  z-index: 1001 !important;
+  transform-origin: center top !important;
+  top: 35px !important;
+  left: inherit !important;
+}

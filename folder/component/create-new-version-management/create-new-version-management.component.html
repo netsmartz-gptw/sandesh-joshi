@@ -1,0 +1,503 @@
+<div class="popup flex flex-column h-full py-4">
+  <!-- <div class="pb-4">
+      <div class="grid2 mt-0 align-items-center">
+        <div class="col py-0"><h5 class="popupstyle m-0">Create New Version</h5></div>
+        <div class="col-fixed py-0">
+          <p-button styleClass="p-1 bg-transparent border-none text-color sidebarClose-btn" (click)="clickSidebar()">
+            <ng-template pTemplate="content">
+              <i class="pi pi-times fs"></i>
+            </ng-template>
+          </p-button>
+        </div>
+      </div>
+    </div> -->
+  <div class="flex-1 relative">
+    <div class="absolute top-0 bottom-0 left-0 right-0 overflow-x-hidden overflow-y-auto cstScroll-style">
+      <div class="px-1">
+        <div class="grid grid-nogutter">
+          <div class="col-12 md:col-8 lg:col-7">
+            <div class="field mb-5">
+              <label class="formField-label">Accounts</label>
+              <input type="text" placeholder="Accounts" class="w-100 font-normal field-filled" pInputText />
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-apiType">
+          <div
+            class="sv-ServiceCard c-pointer"
+            [ngClass]="importmanuallystyle == 0 ? 'import-border' : 'manualy-border'"
+            (click)="apiImportManually(true)"
+          >
+            <div class="w-full">
+              <div class="icon"><img src="assets/images/import-api-spec.svg" alt="" /></div>
+              <div class="txt-wrap font-Nunito">Import API Spec</div>
+            </div>
+          </div>
+          <div class="sv-ServiceCard c-pointer" [ngClass]="importmanuallystyle == 1 ? 'import-border' : 'manualy-border'">
+            <div class="w-full">
+              <div class="icon"><img class="w-full -mt-1" src="assets/images/manual-api-spec.svg" alt="" /></div>
+              <div class="txt-wrap font-Nunito">Add API Manually</div>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="!importCard">
+          <div class="mb-5">
+            <div class="api-buttonset">
+              <div [ngClass]="ind == 0 ? 'active' : 'stats-item-bg-pink'" class="button-item c-pointer" type="button">Import From File</div>
+              <div
+                [ngClass]="ind == 1 ? 'active' : 'stats-item-bg-pink'"
+                (click)="importFileUrl(false)"
+                class="button-item c-pointer"
+                type="button"
+              >
+                Import From URL
+              </div>
+            </div>
+          </div>
+
+          <div [hidden]="!tabView">
+            <div class="grid grid-nogutter">
+              <div class="col-12 md:col-9 lg:col-8">
+                <div class="field mb-5">
+                  <div class="drop-zone">
+                    <span class="drop-zone__prompt">
+                      <img src="assets/images/icon-browsefile.svg" alt="" class="icon" />
+                      <span class="text-wrap flex-grow-1">
+                        Drag and drop or <span class="file-browse-click" (click)="browseropenClick($event)">Browse</span> your file
+                      </span>
+                    </span>
+                    <input
+                      type="file"
+                      enctype="multipart/form-data"
+                      [(ngModel)]="sourceValue"
+                      #fileInput
+                      name="myFile"
+                      class="drop-zone__input"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="col-12 md:col-6">
+                <div class="field mb-3">
+                  <label class="formField-label">Add Environment <span class="mantori">*</span></label>
+                  <div class="relative">
+                    <div class="block p-input-icon-right api-field-Dropdown">
+                      <i class="pi field-icon c-pointer" (click)="clickFilterimportEnvir(0)"></i>
+                      <input
+                        type="text"
+                        [(ngModel)]="importEnvirInput"
+                        [value]="importEnvirInput"
+                        placeholder="Type Environment Name or Select from the List"
+                        class="w-100 font-normal"
+                        pInputText
+                      />
+                    </div>
+
+                    <div *ngIf="showHideCardimportEnvir == 0" class="absolute z-1 top-100 pt-1 w-full">
+                      <div class="sv-card-AvailableItem bg-white">
+                        <div class="card-head flex align-items-center">
+                          <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Add Environment</div>
+                          <div class="pl-2 -mr-2">
+                            <p-button (click)="clickFilterimportEnvir(1)" styleClass="p-1 bg-transparent border-none text-color">
+                              <ng-template pTemplate="content">
+                                <i class="pi pi-times fs"></i>
+                              </ng-template>
+                            </p-button>
+                          </div>
+                        </div>
+                        <div class="card-cont-wrap">
+                          <div class="wrapperChips">
+                            <div class="availableItems">
+                              <span class="tag c-pointer" (click)="clickImportEnvir('QA')">QA</span>
+                              <span class="tag c-pointer" (click)="clickImportEnvir('DEV')">DEV</span>
+                              <span class="tag c-pointer" (click)="clickImportEnvir('SAND')">SAND</span>
+                            </div>
+                            <p-button styleClass="btnFill-stl-2">
+                              <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add New</span> </ng-template>
+                            </p-button>
+                          </div>
+
+                          <div class="bt-wrp">
+                            <div class="text-sm text-light-2">
+                              Cant find the Environment? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 md:col-6">
+                <div class="field mb-3">
+                  <label class="formField-label">Add Build <span class="mantori">*</span></label>
+                  <div class="relative">
+                    <div class="block p-input-icon-right api-field-Dropdown">
+                      <i class="pi field-icon c-pointer" (click)="clickFilterimportBuild(0)"></i>
+                      <input
+                        type="text"
+                        [(ngModel)]="importBuildInput"
+                        [value]="importBuildInput"
+                        placeholder="Type Build Versions or Select from the List"
+                        class="w-100 font-normal"
+                        pInputText
+                      />
+                    </div>
+
+                    <div *ngIf="showHideCardimportBuild == 0" class="absolute z-1 top-100 pt-1 w-full">
+                      <div class="sv-card-AvailableItem bg-white">
+                        <div class="card-head flex align-items-center">
+                          <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Available Build Versions</div>
+                          <div class="pl-2 -mr-2">
+                            <p-button (click)="clickFilterimportBuild(1)" styleClass="p-1 bg-transparent border-none text-color">
+                              <ng-template pTemplate="content">
+                                <i class="pi pi-times fs"></i>
+                              </ng-template>
+                            </p-button>
+                          </div>
+                        </div>
+                        <div class="card-cont-wrap">
+                          <div class="wrapperChips">
+                            <div class="availableItems">
+                              <span class="tag c-pointer" (click)="clickImportBuild('1.142')">1.142</span>
+                              <span class="tag c-pointer" (click)="clickImportBuild('1.45')">1.45</span>
+                              <span class="tag c-pointer" (click)="clickImportBuild('1.47')">1.47</span>
+                            </div>
+                            <p-button styleClass="btnFill-stl-2">
+                              <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add from JIRA</span> </ng-template>
+                            </p-button>
+                          </div>
+
+                          <div class="bt-wrp">
+                            <div class="text-sm text-light-2">
+                              Cant find the Build? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div [hidden]="tabView">
+            <div class="alignment-Spc-1">
+              <div class="grid">
+                <div class="col-12 md:col-8">
+                  <div class="field mb-4 flex align-items-center">
+                    <div class="flex-grow-1">
+                      <input
+                        type="text"
+                        placeholder="https://petstore.swagger.io/v2/swagger.json"
+                        class="w-100 font-normal field-filled"
+                        pInputText
+                      />
+                    </div>
+                    <div class="pl-3">
+                      <span class="reImport c-pointer text-sm font-bold text-primary">Re-Import</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid">
+                <div class="col-12 md:col-6">
+                  <div class="field mb-3">
+                    <label class="formField-label">Add Environment <span class="mantori">*</span></label>
+                    <div class="relative">
+                      <div class="block p-input-icon-right api-field-Dropdown">
+                        <i class="pi field-icon c-pointer" (click)="clickFilterUrlEnvir(0)"></i>
+                        <input
+                          type="text"
+                          [(ngModel)]="importUrlEnvirInput"
+                          [value]="importUrlEnvirInput"
+                          placeholder="Type Environment Name or Select from the List"
+                          class="w-100 font-normal"
+                          pInputText
+                        />
+                      </div>
+
+                      <div *ngIf="showHideCardimportUrlEnvir == 0" class="absolute z-1 top-100 pt-1 w-full">
+                        <div class="sv-card-AvailableItem bg-white">
+                          <div class="card-head flex align-items-center">
+                            <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Add Environment</div>
+                            <div class="pl-2 -mr-2">
+                              <p-button (click)="clickFilterUrlEnvir(1)" styleClass="p-1 bg-transparent border-none text-color">
+                                <ng-template pTemplate="content">
+                                  <i class="pi pi-times fs"></i>
+                                </ng-template>
+                              </p-button>
+                            </div>
+                          </div>
+                          <div class="card-cont-wrap">
+                            <div class="wrapperChips">
+                              <div class="availableItems">
+                                <span class="tag c-pointer" (click)="clickImportUrl('QA')">QA</span>
+                                <span class="tag c-pointer" (click)="clickImportUrl('DEV')">DEV</span>
+                                <span class="tag c-pointer" (click)="clickImportUrl('SAND')">SAND</span>
+                              </div>
+                              <p-button styleClass="btnFill-stl-2">
+                                <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add New</span> </ng-template>
+                              </p-button>
+                            </div>
+
+                            <div class="bt-wrp">
+                              <div class="text-sm text-light-2">
+                                Cant find the Environment? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 md:col-6">
+                  <div class="field mb-3">
+                    <label class="formField-label">Add Build <span class="mantori">*</span></label>
+                    <div class="relative">
+                      <div class="block p-input-icon-right api-field-Dropdown">
+                        <i class="pi field-icon c-pointer" (click)="clickFilterUrlBuild(0)"></i>
+                        <input
+                          type="text"
+                          [(ngModel)]="importUrlBuildInput"
+                          [value]="importUrlBuildInput"
+                          placeholder="Type Build Versions or Select from the List"
+                          class="w-100 font-normal"
+                          pInputText
+                        />
+                      </div>
+
+                      <div *ngIf="showHideCardUrlBuild == 0" class="absolute z-1 top-100 pt-1 w-full">
+                        <div class="sv-card-AvailableItem bg-white">
+                          <div class="card-head flex align-items-center">
+                            <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Available Build Versions</div>
+                            <div class="pl-2 -mr-2">
+                              <p-button (click)="clickFilterUrlBuild(1)" styleClass="p-1 bg-transparent border-none text-color">
+                                <ng-template pTemplate="content">
+                                  <i class="pi pi-times fs"></i>
+                                </ng-template>
+                              </p-button>
+                            </div>
+                          </div>
+                          <div class="card-cont-wrap">
+                            <div class="wrapperChips">
+                              <div class="availableItems">
+                                <span class="tag c-pointer" (click)="clickImportUrlBuild('1.142')">1.142</span>
+                                <span class="tag c-pointer" (click)="clickImportUrlBuild('1.45')">1.45</span>
+                                <span class="tag c-pointer" (click)="clickImportUrlBuild('1.47')">1.47</span>
+                              </div>
+                              <p-button styleClass="btnFill-stl-2">
+                                <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add from JIRA</span> </ng-template>
+                              </p-button>
+                            </div>
+                            <div class="bt-wrp">
+                              <div class="text-sm text-light-2">
+                                Cant find the Build? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="importCard">
+          <div class="grid">
+            <div class="col-12 md:col-6">
+              <div class="field mb-4">
+                <label class="formField-label">Select Protocol <span class="mantori">*</span></label>
+                <div class="relative">
+                  <div class="block p-input-icon-right api-field-Dropdown">
+                    <i class="pi field-icon c-pointer" (click)="clickFilterProtocol(0)"></i>
+                    <input
+                      type="text"
+                      [(ngModel)]="manuallyProtocolInput"
+                      [value]="manuallyProtocolInput"
+                      placeholder="Type Environment Name or Select from the List"
+                      class="w-100 font-normal"
+                      pInputText
+                    />
+                  </div>
+                  <div *ngIf="showHideCardProtocol == 0" class="absolute z-2 top-100 pt-1 w-full">
+                    <div class="sv-card-AvailableItem bg-white">
+                      <div class="card-head flex align-items-center">
+                        <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Add Protocol</div>
+                        <div class="pl-2 -mr-2">
+                          <p-button (click)="clickFilterProtocol(1)" styleClass="p-1 bg-transparent border-none text-color">
+                            <ng-template pTemplate="content">
+                              <i class="pi pi-times fs"></i>
+                            </ng-template>
+                          </p-button>
+                        </div>
+                      </div>
+                      <div class="card-cont-wrap">
+                        <div class="wrapperChips">
+                          <div class="availableItems">
+                            <span class="tag c-pointer" (click)="clickManuallyProtocol('REST')">REST</span>
+                            <span class="tag c-pointer" (click)="clickManuallyProtocol('RPC')">RPC</span>
+                            <span class="tag c-pointer" (click)="clickManuallyProtocol('SOAP')">SOAP</span>
+                          </div>
+                          <p-button styleClass="btnFill-stl-2">
+                            <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add New</span> </ng-template>
+                          </p-button>
+                        </div>
+                        <div class="bt-wrp">
+                          <div class="text-sm text-light-2">
+                            Cant find the Environment? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="col-12 md:col-6">
+              <div class="field mb-3">
+                <label class="formField-label">Add Environment <span class="mantori">*</span></label>
+                <div class="relative">
+                  <div class="block p-input-icon-right api-field-Dropdown">
+                    <i class="pi field-icon c-pointer" (click)="clickFilterManuallyEnvir(0)"></i>
+                    <input
+                      type="text"
+                      [(ngModel)]="manuallyEnvirInput"
+                      [value]="manuallyEnvirInput"
+                      placeholder="Type Environment Name or Select from the List"
+                      class="w-100 font-normal"
+                      pInputText
+                    />
+                  </div>
+                  <div *ngIf="showHideCardManuallyEnvir == 0" class="absolute z-1 top-100 pt-1 w-full">
+                    <div class="sv-card-AvailableItem bg-white">
+                      <div class="card-head flex align-items-center">
+                        <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Add Environment</div>
+                        <div class="pl-2 -mr-2">
+                          <p-button (click)="clickFilterManuallyEnvir(1)" styleClass="p-1 bg-transparent border-none text-color">
+                            <ng-template pTemplate="content">
+                              <i class="pi pi-times fs"></i>
+                            </ng-template>
+                          </p-button>
+                        </div>
+                      </div>
+                      <div class="card-cont-wrap">
+                        <div class="wrapperChips">
+                          <div class="availableItems">
+                            <span class="tag c-pointer" (click)="clickManuallyEnvir('QA')">QA</span>
+                            <span class="tag c-pointer" (click)="clickManuallyEnvir('DEV')">DEV</span>
+                            <span class="tag c-pointer" (click)="clickManuallyEnvir('SAND')">SAND</span>
+                          </div>
+                          <p-button styleClass="btnFill-stl-2">
+                            <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add New</span> </ng-template>
+                          </p-button>
+                        </div>
+                        <div class="bt-wrp">
+                          <div class="text-sm text-light-2">
+                            Cant find the Environment? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 md:col-6">
+              <div class="field mb-3">
+                <label class="formField-label">Add Build <span class="mantori">*</span></label>
+                <div class="relative">
+                  <div class="block p-input-icon-right api-field-Dropdown">
+                    <i class="pi field-icon c-pointer" (click)="clickFilterManuallyBuild(0)"></i>
+                    <input
+                      type="text"
+                      [(ngModel)]="manuallyBuildInput"
+                      [value]="manuallyBuildInput"
+                      placeholder="Type Build Versions or Select from the List"
+                      class="w-100 font-normal"
+                      pInputText
+                    />
+                  </div>
+                  <div *ngIf="showHideCardManuallyBuild == 0" class="absolute z-1 top-100 pt-1 w-full">
+                    <div class="sv-card-AvailableItem bg-white">
+                      <div class="card-head flex align-items-center">
+                        <div class="bx-title text-base font-bold text-light-2 flex-grow-1">Available Build Versions</div>
+                        <div class="pl-2 -mr-2">
+                          <p-button (click)="clickFilterManuallyBuild(1)" styleClass="p-1 bg-transparent border-none text-color">
+                            <ng-template pTemplate="content">
+                              <i class="pi pi-times fs"></i>
+                            </ng-template>
+                          </p-button>
+                        </div>
+                      </div>
+                      <div class="card-cont-wrap">
+                        <div class="wrapperChips">
+                          <div class="availableItems">
+                            <span class="tag c-pointer" (click)="clickManuallyBuild('1.142')">1.142</span>
+                            <span class="tag c-pointer" (click)="clickManuallyBuild('1.45')">1.45</span>
+                            <span class="tag c-pointer" (click)="clickManuallyBuild('1.47')">1.47</span>
+                          </div>
+                          <p-button styleClass="btnFill-stl-2">
+                            <ng-template pTemplate="content"> <i class="icon pi pi-plus"></i> <span>Add from JIRA</span> </ng-template>
+                          </p-button>
+                        </div>
+                        <div class="bt-wrp">
+                          <div class="text-sm text-light-2">
+                            Cant find the Build? <span class="text-primary font-bold c-pointer">Contact Admin</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-4 px-1">
+    <ul class="list-none flex justify-content-end p-0 m-0">
+      <li class="pr-3">
+        <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded" (click)="cancelScreen()"></button>
+      </li>
+      <li>
+        <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" (click)="cancelScreen()"></button>
+      </li>
+    </ul>
+    <!-- <ul class="list-none p-0 m-0 flex justify-content-end">
+      <li class="pr-4">
+        <button
+          (click)="cancelScreen()"
+          pButton
+          icon="pi pi-arrow-left"
+          iconPos="left"
+          type="button"
+          class="btn-width-black-large"
+          label="Cancel"
+        ></button>
+      </li>
+      <li>
+        <button
+          (click)="cancelScreen()"
+          pButton
+          [label]="importCard == true ? 'Import' : 'Next'"
+          class="btn-width-black-large"
+          style="width: 110px"
+        ></button>
+      </li>
+    </ul> -->
+  </div>
+</div>

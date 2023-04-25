@@ -1,0 +1,22 @@
+.popupstyle {
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--color-grey);
+}
+// .card {
+//   background: #ffffff;
+//   border: 1px solid rgba(170, 178, 197, 0.4);
+//   box-shadow: 0px 4px 16px rgba(143, 149, 178, 0.15);
+// }
+.hr {
+  border-bottom: 0.25px solid #d0d9e9;
+  margin-top: 4rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+::ng-deep .p-sidebar .p-sidebar-header + .p-sidebar-content {
+  /* padding-top: 0; */
+  overflow-y: hidden;
+}

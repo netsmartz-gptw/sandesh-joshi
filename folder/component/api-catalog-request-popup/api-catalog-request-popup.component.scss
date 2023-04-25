@@ -1,0 +1,88 @@
+.popup {
+  .fs {
+    font-size: 20px;
+  }
+  .hr {
+    color: #aab2c5;
+    height: 2px;
+    margin-top: 2px;
+    width: 94%;
+    margin-left: 12px;
+    margin-bottom: 2em;
+  }
+  .grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(173px, 1fr));
+    grid-gap: 25px;
+  }
+  .grid2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.5rem;
+    margin-left: 0.5rem;
+  }
+  .popupstyle {
+    font-family: var(--font-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--color-grey);
+  }
+  .icon-edit {
+    // float: right;
+    // padding: 13px;
+    cursor: pointer !important;
+  }
+  .boxline {
+    // border: 1px solid #aab2c5;
+    height: 39em;
+    border-radius: 10px;
+    .icon {
+      float: right;
+      padding: 13px;
+      cursor: pointer;
+    }
+    .line {
+      // border-bottom: 1px solid #aab2c5;
+      padding-top: 4em;
+    }
+    .jsontree {
+      .overflow {
+        // overflow: hidden!important;
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+        .clr-rd {
+          color: #fd346e;
+        }
+        .clr-bl {
+          color: #3448fa;
+        }
+      }
+    }
+  }
+  .p-button.p-button-outlined {
+    background: #3d455b !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+  }
+}
+:host ::ng-deep json-editor,
+:host ::ng-deep json-editor .jsoneditor,
+:host ::ng-deep json-editor > div,
+:host ::ng-deep json-editor jsoneditor-outer {
+  height: 500px;
+}
+::ng-deep .jsoneditor-menu {
+  width: 100% !important;
+  height: 35px !important;
+  padding: 2px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  color: #fff !important;
+  background: #eff2f7 !important;
+  //  border: 1px solid #aab2c5!important;
+}
+// ::ng-deep .jsoneditor {
+//  border: none!important;
+// }

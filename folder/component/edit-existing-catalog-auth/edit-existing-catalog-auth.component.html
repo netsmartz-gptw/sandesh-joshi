@@ -1,0 +1,223 @@
+<div class="p-4">
+  <div class="grid">
+    <div class="col-8">
+      <h1 class="accHeading m-0">Accounts</h1>
+    </div>
+    <div class="col-4 justify-content-end align-self-center">
+      <ul class="list-none p-0 m-0 flex justify-content-end">
+        <li>
+          <button class="publi-execute mr-1" pButton pRipple>
+            <img src="assets/images/doublearrow.svg" alt="" class="icon" /> Publish
+          </button>
+        </li>
+        <li>
+          <button class="publi-execute mr-1" pButton pRipple>
+            <img src="assets/images/executearrow.svg" alt="" class="icon" /> Execute
+          </button>
+          <!-- <button *ngIf="tabView != 1" class="publi-execute" pButton pRipple><img src="assets/images/executearrow.svg" alt="" class="icon" />  Execute</button> -->
+        </li>
+      </ul>
+    </div>
+    <div class="p-0">
+      <div class="tab-wrapper">
+        <p-tabView class="mw-tabview">
+          <p-tabPanel>
+            <ng-template pTemplate="header"
+              ><span class="p-tabview-title-container"><span class="p-tabview-title">AUTH</span></span></ng-template
+            >
+            <ng-template pTemplate="content">
+              <!-- <api-existing-auth-tab></api-existing-auth-tab> -->
+              <div class="tab">
+                <div class="flex flex-row bottm-cl">
+                  <div class="col-2 wtd-1">
+                    <span>You are viewing</span>
+                  </div>
+                  <div class="col-2 wtd-2">
+                    <p class="rst">OAuth2</p>
+                  </div>
+                  <div class="col-2 wtd-3">
+                    <a>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.285156" y="0.260742" width="15.4785" height="15.4785" rx="7.73926" fill="#27B69C" />
+                        <path
+                          d="M8.99134 8.96741V9.93481H10.1809C9.91052 10.2398 9.57838 10.4838 9.2065 10.6506C8.83462 10.8174 8.43151 10.9032 8.02393 10.9022C7.25448 10.9014 6.51678 10.5953 5.97269 10.0512C5.4286 9.50716 5.12256 8.76946 5.12171 8H4.1543C4.15274 8.78684 4.39156 9.55538 4.83879 10.2028C5.28602 10.8501 5.92032 11.3455 6.6568 11.6224C7.39328 11.8994 8.19679 11.9448 8.95978 11.7526C9.72277 11.5603 10.4088 11.1396 10.9262 10.5467V11.8696H11.8936V8.96741H8.99134Z"
+                          fill="white"
+                        />
+                        <path
+                          d="M8.02393 4.13086C7.47415 4.13369 6.93122 4.25306 6.43096 4.48109C5.9307 4.70912 5.48446 5.04062 5.1217 5.45374V4.13086H4.1543V7.03308H7.05652V6.06567H5.86699C6.13734 5.76066 6.46948 5.51666 6.84136 5.34987C7.21324 5.18307 7.61635 5.09731 8.02393 5.09827C8.79338 5.09911 9.53108 5.40515 10.0752 5.94924C10.6193 6.49333 10.9253 7.23103 10.9261 8.00049H11.8936C11.8924 6.97456 11.4843 5.99099 10.7589 5.26555C10.0334 4.54011 9.04985 4.13204 8.02393 4.13086Z"
+                          fill="white"
+                        />
+                      </svg>
+                      Replace Auth?
+                    </a>
+                  </div>
+                </div>
+                <div class="flex flex-row bottm-cl">
+                  <div class="col-5 methodInput">
+                    <label class="top-label">Auth name</label>
+                    <input type="text" class="form-control input-all" placeholder="   PmtSvcAuth" />
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-5 methodInput">
+                    <label class="top-label">Auth url</label>
+                    <input type="text" class="form-control input-all" placeholder="    https://sdsdsdssewrefddfdf.com" />
+                  </div>
+                  <div class="col-1 methodInput">
+                    <img src="assets/images/popup-arrow-close.svg" alt="" class="icon" />
+                  </div>
+                </div>
+                <div class="pb-5 table-card">
+                  <div class="card-repoItem2 popup-card testpack-repoItem card-api2 cursor-pointer" style="margin-top: 20px">
+                    <table class="h-full">
+                      <thead>
+                        <tr>
+                          <th class="left-radius firstTableth">
+                            <p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox>
+                          </th>
+                          <th class="firstTableth2">Name</th>
+                          <th class="right-radius">Role</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox>
+                          </td>
+                          <td>Grant_type</td>
+                          <td>
+                            <input
+                              type="text"
+                              class="form-control input-all"
+                              placeholder="Client_crederntial"
+                              style="width: 60% !important"
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox>
+                          </td>
+                          <td>Username</td>
+                          <td><input type="text" class="form-control input-all" placeholder="Admin" style="width: 60% !important" /></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox>
+                          </td>
+                          <td>Password</td>
+                          <td><input type="text" class="form-control input-all" placeholder="Admin" style="width: 60% !important" /></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox>
+                          </td>
+                          <td>Username</td>
+                          <td><input type="text" class="form-control input-all" placeholder="Admin" style="width: 60% !important" /></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p-checkbox name="testcase-group1" value="testcase-check-2"></p-checkbox>
+                          </td>
+                          <td>Password</td>
+                          <td><input type="text" class="form-control input-all" placeholder="Admin" style="width: 60% !important" /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <table class="mt-10 table-card">
+                  <thead>
+                    <tr>
+                      <th class="left-radius secondTableth">Field</th>
+                      <th>Value</th>
+                      <th class="right-radius"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="secondTabletd">access_token</td>
+                      <td class="secondTabletd" style="word-break: break-all">
+                        eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfVUlPV3hGVkFEZjhDeGxxbW91V1JWZzlXWjg1dGd2RUd3OUVvZlByY0RrIn0.eyJleHAiOjE2NjAzMDk3OTUsImlhdCI6MTY2MDMwOTQ5NSwianRpIjoiOTU3MTA2ODYtMWY0Mi00YzI1LWE0ZDgtZDM3MjU3MWZlMGJlIiwiaXNzIjoiaHR0cDovLzE3Mi4xNi4yNC4yNzo5MDgwL2F1dGgvcmVhbG1zL2poaXBzdG...
+                      </td>
+                      <td class="secondTabletd">
+                        <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M5.69995 14.9004H13.4" stroke="#3D455B" stroke-width="1.9091" stroke-miterlimit="10" />
+                          <path d="M9.5 11V18.7" stroke="#3D455B" stroke-width="1.9091" stroke-miterlimit="10" />
+                          <path
+                            d="M20 22.4992H2.9C1.9 22.4992 1 21.5992 1 20.5992V7.19922H18.2V20.5992C18.1 21.5992 19 22.4992 20 22.4992Z"
+                            stroke="#3D455B"
+                            stroke-width="1.9091"
+                            stroke-miterlimit="10"
+                          />
+                          <path
+                            d="M22 3.39999V20.6C22 21.7 21.1 22.5 20.1 22.5C19.1 22.5 18.2001 21.6 18.2001 20.6V7.2H4.80005V1.5H14.3L16.2001 3.39999H22Z"
+                            stroke="#3D455B"
+                            stroke-width="1.9091"
+                            stroke-miterlimit="10"
+                          />
+                        </svg>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="secondTabletd">expires in</td>
+                      <td class="secondTabletd">300</td>
+                      <td class="secondTabletd"></td>
+                    </tr>
+                    <tr>
+                      <td class="secondTabletd">refresh_expires_in</td>
+                      <td class="secondTabletd">0</td>
+                      <td class="secondTabletd"></td>
+                    </tr>
+                    <tr>
+                      <td class="secondTabletd">token_type</td>
+                      <td class="secondTabletd">Bearer</td>
+                      <td class="secondTabletd"></td>
+                    </tr>
+                    <tr>
+                      <td class="secondTabletd">scope</td>
+                      <td class="secondTabletd">email profile</td>
+                      <td class="secondTabletd"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ng-template>
+          </p-tabPanel>
+          <p-tabPanel>
+            <ng-template pTemplate="header"
+              ><span class="p-tabview-title-container"><span class="p-tabview-title">SETTINGS</span></span></ng-template
+            >
+            <ng-template pTemplate="content">
+              <div class="auth-setting">
+                <div class="flex flex-row mt-3">
+                  <div class="col-10 methodInput mb-3">
+                    <label class="top-label">Base URL </label>
+                    <input type="text" class="form-control input-all" placeholder="Base URL" />
+                  </div>
+                  <div class="col-2">
+                    <img src="assets/images/popup-arrow-close.svg" alt="" class="icon" />
+                  </div>
+                </div>
+                <label class="top-label mt-3">Access</label>
+                <div class="flex flex-row mt-2">
+                  <div class="col-2 col-width1">
+                    <span class="labelBtn">Private</span>
+                  </div>
+                  <div class="col-2">
+                    <label class="switch">
+                      <input type="checkbox" />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="col-4 col-width3">
+                    <span class="labelBtn">Team Workspace</span>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

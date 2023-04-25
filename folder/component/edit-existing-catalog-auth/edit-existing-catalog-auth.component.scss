@@ -1,0 +1,231 @@
+.accHeading {
+  font-family: 'lato';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 48px;
+  color: #252c42;
+  margin-left: -12px;
+}
+.card {
+  background: #ffffff;
+  box-shadow: 0px 4px 16px rgba(143, 149, 178, 0.15);
+  border-radius: 10px;
+}
+.tab {
+  .bottm-cl {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  .wtd-1 {
+    width: 13%;
+  }
+  .wtd-2 {
+    width: 9%;
+  }
+  .methodInput {
+    .icon {
+      margin-top: 30px;
+    }
+  }
+  .rst {
+    border-radius: 10px;
+    border: 1px solid #fd8313;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 5px 0px 5px;
+    width: 60px;
+  }
+  .top-label {
+    font-family: 'Lato', sans-serif;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 19px;
+    color: #697495;
+    margin-bottom: 15px;
+  }
+  .input-all {
+    height: 50px;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 8px;
+    border: 1.5px solid #8d95ac;
+  }
+  th {
+    border: 0;
+  }
+  .content .methodInput input {
+    display: block;
+  }
+  .methodInput svg {
+    margin-top: 35px;
+    margin-left: 15px;
+  }
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  tr.mat-header-row {
+    height: 56px;
+    background: #eff2f6;
+    border-style: hidden;
+  }
+  .table > :not(:first-child) {
+    border-top: none !important;
+  }
+}
+.table-card {
+  .popup-card {
+    box-shadow: 0px 9px 14px rgb(143 149 178 / 22%);
+  }
+  .card-api2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  .left-radius {
+    border-top-left-radius: 10px;
+  }
+  .firstTableth {
+    width: 4rem;
+  }
+  .firstTableth2 {
+    width: 11rem;
+  }
+  .right-radius {
+    border-top-right-radius: 10px;
+  }
+  .form-control {
+    padding-left: 2.375rem;
+  }
+  .input-all {
+    height: 40px;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 8px;
+    border: 1.5px solid #8d95ac;
+  }
+  .secondTableth {
+    width: 9rem;
+  }
+  .secondTabletd {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  thead {
+    background: #eff2f7;
+    border-radius: 10px 10px 0px 0px;
+    height: 50px;
+  }
+  th {
+    padding: 5px;
+    padding-left: 25px;
+  }
+  td {
+    padding: 5px;
+    padding-left: 25px;
+  }
+  .p-field-checkbox {
+    margin-bottom: 21px;
+  }
+  .p-checkbox {
+    margin-right: 13px;
+  }
+}
+.auth-setting {
+  .methodInput {
+    width: 150% !important;
+  }
+  .icon {
+    margin-top: 1.5rem;
+  }
+  .top-label {
+    font-family: 'Lato', sans-serif;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    line-height: 19px;
+    color: #697495;
+    margin-bottom: 15px;
+  }
+  .input-all {
+    height: 40px;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 8px;
+    border: 1.5px solid #8d95ac;
+  }
+  .labelBtn {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 27px;
+    color: #3d455b;
+  }
+  .col-width1 {
+    width: 22.666667%;
+  }
+  .col-width2 {
+    width: 20.333333%;
+    margin-top: 0px;
+  }
+  .col-width3 {
+    width: 60.666667%;
+  }
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 43px;
+  height: 20px;
+  margin-top: 0.4rem;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 12px;
+  width: 12px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+input:checked + .slider {
+  background-color: #0fc8bc;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #0fc8bc;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
